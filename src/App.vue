@@ -1,54 +1,66 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
+  <div id="app" class="container">
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <router-link to="" class="navbar-item" id="brand">HOODWINK</router-link>
+        <div class="navbar-burger burger" data-target="nav-menu-transparent">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div id="nav-menu-transparent" class="navbar-menu">
+        <div class="navbar-start">
+          <router-link to="" class="navbar-item">Tracklist</router-link>
+          <router-link to="" class="navbar-item">Bookmarks</router-link>
+        </div>
+        <div class="navbar-end">
+          <router-link to="" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</router-link>
+          <div class="navbar-item" v-if="isLoggedIn">
+            <router-link to="" class="button is-outlined is-primary">My Account</router-link>
+          </div>
+          <div class="field has-addons navbar-item" v-else>
+            <p class="control">
+              <router-link to="" class="button is-outlined">Login</router-link>
+            </p>
+            <p class="control">
+              <router-link to="" class="button is-primary">Register</router-link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  export default {
+    name: 'app',
+    data() {
+      return {
+        isLoggedIn: true
+      };
+    },
+    methods: {
+
+
+    }
+  }
 </script>
 
 <style>
-body {
-  margin: 0;
-}
+  @import url('https://fonts.googleapis.com/css?family=Poiret+One');
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
+  body {
+    margin: 0;
+  }
 
-main {
-  text-align: center;
-  margin-top: 40px;
-}
+  #app {
+    font-family: Helvetica, sans-serif;
+  }
 
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
+  #brand {
+    font-family: Poiret One, Helvetica,sans-serif;
+    font-size: 1.5em;
+  }
 </style>
