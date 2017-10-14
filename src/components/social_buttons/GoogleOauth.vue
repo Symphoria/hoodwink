@@ -18,6 +18,13 @@
         firebase.auth().signInWithPopup(provider).then(result => {
           let user = result.user;
           self.$emit('has-logged-in', user.email);
+        }).catch(error => {
+          self.$snackbar.open({
+            duration: 10000,
+            message: error.message,
+            type: 'is-danger',
+            position: 'is-bottom-right'
+          });
         })
       }
     }
