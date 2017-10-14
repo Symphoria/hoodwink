@@ -44,7 +44,7 @@
             <p id="sign-up" style="text-align: center">Sign In Using :</p>
             <div class="columns">
               <div class="column" style="text-align: center;">
-                <google-button></google-button>
+                <google-button @has-logged-in="oauthSignUp"></google-button>
               </div>
               <div class="column" style="text-align: center;">
                 <facebook-button></facebook-button>
@@ -53,7 +53,7 @@
                 <twitter-button></twitter-button>
               </div>
               <div class="column" style="text-align: center;">
-                <GithubButton></GithubButton>
+                <github-button></github-button>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
   import GoogleButton from './social_buttons/GoogleOauth.vue'
   import TwitterButton from './social_buttons/TwitterOauth.vue'
   import GithubButton from './social_buttons/GithubOauth.vue'
-  import ajax from '../ajax'
+  import ajax from '../utilities/ajax'
   import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
 
   export default {
@@ -101,7 +101,6 @@
           this.isLoading = false;
           this.errorMessage = error.response.data.message;
           this.hasError = true;
-          console.log(error.response.data.message);
         })
       },
       openSnackbar() {
@@ -111,6 +110,9 @@
           type: 'is-default',
           position: 'is-top-left'
         });
+      },
+      oauthSignUp(email) {
+        console.log(email);
       }
     }
   }
