@@ -27,7 +27,7 @@
                 <router-link to="" class="button is-outlined">Login</router-link>
               </p>
               <p class="control">
-                <router-link to="/register" class="button is-primary">Register</router-link>
+                <router-link to="/register" class="button is-primary">Sign Up</router-link>
               </p>
             </div>
           </div>

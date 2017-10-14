@@ -47,13 +47,13 @@
                 <google-button @has-logged-in="oauthSignUp"></google-button>
               </div>
               <div class="column" style="text-align: center;">
-                <facebook-button></facebook-button>
+                <facebook-button @has-logged-in="oauthSignUp"></facebook-button>
               </div>
               <div class="column" style="text-align: center;">
-                <twitter-button></twitter-button>
+                <twitter-button @has-logged-in="oauthSignUp"></twitter-button>
               </div>
               <div class="column" style="text-align: center;">
-                <github-button></github-button>
+                <github-button @has-logged-in="oauthSignUp"></github-button>
               </div>
             </div>
           </div>

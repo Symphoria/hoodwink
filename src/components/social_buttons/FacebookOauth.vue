@@ -1,13 +1,25 @@
 <template>
-  <a class="button is-medium">
+  <a class="button is-medium" @click="signIn">
     <span class="icon"><i class="fa fa-facebook"></i></span>
     <span>Facebook</span>
   </a>
 </template>
 
 <script>
-  export default {
+  import firebase from 'firebase';
 
+  export default {
+    methods: {
+      signIn() {
+        let self = this;
+        let provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
+        firebase.auth().signInWithPopup(provider).then(result => {
+          let user = result.user;
+          self.$emit('has-logged-in', user.email);
+        })
+      }
+    }
   }
 </script>
 
