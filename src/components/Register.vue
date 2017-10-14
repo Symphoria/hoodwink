@@ -7,7 +7,7 @@
           <div class="box" id="inner-box">
             <div class="field">
               <p class="control has-icons-left">
-                <input class="input is-medium" placeholder="Enter Username"/>
+                <input class="input is-medium" placeholder="Enter Username" v-model="username"/>
                 <span class="icon is-left">
               <i class="fa fa-user"></i>
             </span>
@@ -15,7 +15,7 @@
             </div>
             <div class="field">
               <p class="control has-icons-left">
-                <input class="input is-medium" type="password" placeholder="Enter Password"/>
+                <input class="input is-medium" type="password" v-model="password" placeholder="Enter Password"/>
                 <span class="icon is-left">
               <i class="fa fa-lock"></i>
             </span>
@@ -23,7 +23,7 @@
             </div>
             <div class="field">
               <p class="control has-icons-left">
-                <input class="input is-medium" type="email" placeholder="Enter Email"/>
+                <input class="input is-medium" type="email" v-model="email" placeholder="Enter Email"/>
                 <span class="icon is-left">
               <i class="fa fa-envelope"></i>
             </span>
@@ -31,8 +31,12 @@
             </div>
             <div class="field is-grouped is-grouped-centered">
               <p class="control">
-                <a class="button is-primary is-medium" style="background-color: #F15F79">Submit</a>
+                <a :class="{'button is-primary is-medium': true, 'is-loading': isLoading}"
+                   style="background-color: #F15F79" @click="submitForm">Submit</a>
               </p>
+            </div>
+            <div class="field">
+              <b-notification type="is-danger" :active.sync="hasError">{{ errorMessage }}</b-notification>
             </div>
             <div class="field">
               <hr>
@@ -64,9 +68,51 @@
   import GoogleButton from './social_buttons/GoogleOauth.vue'
   import TwitterButton from './social_buttons/TwitterOauth.vue'
   import GithubButton from './social_buttons/GithubOauth.vue'
+  import ajax from '../ajax'
+  import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
 
   export default {
-    components: {FacebookButton, GoogleButton, TwitterButton, GithubButton}
+    components: {
+      BNotification,
+      FacebookButton, GoogleButton, TwitterButton, GithubButton},
+    data() {
+      return {
+        username: '',
+        password: '',
+        email: '',
+        isLoading: false,
+        errorMessage: '',
+        hasError: false
+      }
+    },
+    methods: {
+      submitForm() {
+        this.isLoading = true;
+        ajax.post('register', {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          viaOauth: false
+        }).then(response => {
+          this.username = this.password = this.email = '';
+          this.isLoading = false;
+          this.openSnackbar();
+        }).catch(error => {
+          this.isLoading = false;
+          this.errorMessage = error.response.data.message;
+          this.hasError = true;
+          console.log(error.response.data.message);
+        })
+      },
+      openSnackbar() {
+        this.$snackbar.open({
+          duration: 10000,
+          message: 'We have sent a confirmation mail to you. Check your inbox to continue',
+          type: 'is-default',
+          position: 'is-top-left'
+        });
+      }
+    }
   }
 </script>
 
@@ -116,7 +162,8 @@
   }
 
   .slide-fade-enter
-    /* .slide-fade-leave-active below version 2.1.8 */ {
+    /* .slide-fade-leave-active below version 2.1.8 */
+  {
     transform: translateY(10px);
     opacity: 0;
   }
