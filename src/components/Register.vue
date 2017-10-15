@@ -42,7 +42,7 @@
               <hr>
             </div>
             <p id="sign-up" style="text-align: center">Sign In Using :</p>
-            <div class="columns">
+            <div class="columns is-desktop">
               <div class="column" style="text-align: center;">
                 <google-button @has-logged-in="oauthSignUp"></google-button>
               </div>
@@ -72,9 +72,7 @@
   import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
 
   export default {
-    components: {
-      BNotification,
-      FacebookButton, GoogleButton, TwitterButton, GithubButton},
+    components: { BNotification, FacebookButton, GoogleButton, TwitterButton, GithubButton },
     data() {
       return {
         username: '',
@@ -109,10 +107,27 @@
           message: 'We have sent a confirmation mail to you. Check your inbox to continue',
           type: 'is-default',
           position: 'is-top-left'
-        });
+        })
       },
       oauthSignUp(email) {
-        console.log(email);
+        const loadingComponent = this.$loading.open();
+        ajax.post('register', {
+          email: email,
+          viaOauth: true
+        }).then(response => {
+          localStorage.setItem('authToken', response.data.authToken);
+          this.$emit('oauth-sign-up');
+          loadingComponent.close();
+          this.$router.replace({ name: 'search' })
+        }).catch(error => {
+          loadingComponent.close();
+          this.$snackbar.open({
+            duration: 10000,
+            message: error.response.data.message,
+            type: 'is-danger',
+            position: 'is-bottom-right'
+          });
+        })
       }
     }
   }

@@ -33,7 +33,7 @@
           </div>
         </div>
       </nav>
-    <router-view></router-view>
+    <router-view @oauth-sign-up="isLoggedIn = true"></router-view>
   </div>
 </template>
 
