@@ -150,6 +150,8 @@
     -webkit-box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
     box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    padding-bottom: 5%;
+    padding-top: 5%;
   }
 
   .slide-fade-enter-active {
