@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Search from '../components/Search.vue'
 import Register from '../components/Register.vue'
 import Confirm from '../components/Confirm.vue'
+import Login from '../components/Login.vue'
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/confirm/:confirmToken',
       name: 'confirm',
       component: Confirm
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

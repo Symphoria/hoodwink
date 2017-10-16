@@ -24,7 +24,7 @@
             </div>
             <div class="field has-addons navbar-item" v-else>
               <p class="control">
-                <router-link to="" class="button is-outlined">Login</router-link>
+                <router-link to="/login" class="button is-outlined">Login</router-link>
               </p>
               <p class="control">
                 <router-link to="/register" class="button is-primary">Sign Up</router-link>
@@ -33,7 +33,7 @@
           </div>
         </div>
       </nav>
-    <router-view @oauth-sign-up="isLoggedIn = true"></router-view>
+    <router-view @logged-in="isLoggedIn = true"></router-view>
   </div>
 </template>
 
@@ -55,7 +55,7 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Poiret+One');
+  @import url('https://fonts.googleapis.com/css?family=Poiret+One|Lato|Roboto');
 
   html {
     height: 100%;

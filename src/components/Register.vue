@@ -86,10 +86,11 @@
     methods: {
       submitForm() {
         this.isLoading = true;
+        this.hasError = false;
         ajax.post('register', {
-          username: this.username,
-          password: this.password,
-          email: this.email,
+          username: this.username.trim(),
+          password: this.password.trim(),
+          email: this.email.trim(),
           viaOauth: false
         }).then(response => {
           this.username = this.password = this.email = '';
@@ -103,7 +104,7 @@
       },
       openSnackbar() {
         this.$snackbar.open({
-          duration: 10000,
+          duration: 15000,
           message: 'We have sent a confirmation mail to you. Check your inbox to continue',
           type: 'is-default',
           position: 'is-top-left'
@@ -116,13 +117,13 @@
           viaOauth: true
         }).then(response => {
           localStorage.setItem('authToken', response.data.authToken);
-          this.$emit('oauth-sign-up');
+          this.$emit('logged-in');
           loadingComponent.close();
           this.$router.replace({ name: 'search' })
         }).catch(error => {
           loadingComponent.close();
           this.$snackbar.open({
-            duration: 10000,
+            duration: 15000,
             message: error.response.data.message,
             type: 'is-danger',
             position: 'is-bottom-right'
@@ -144,6 +145,7 @@
 
   .input {
     font-family: "Lato", sans-serif;
+    font-weight: 300;
   }
 
   #sign-up {
@@ -166,6 +168,7 @@
     font-family: "Lato", "Helvetica Neue", sans-serif;
     font-size: 4em;
     margin-bottom: 2%;
+    font-weight: 300;
   }
 
   #inner-box {
@@ -181,7 +184,7 @@
   .slide-fade-enter
     /* .slide-fade-leave-active below version 2.1.8 */
   {
-    transform: translateY(10px);
+    transform: translateY(15px);
     opacity: 0;
   }
 </style>
