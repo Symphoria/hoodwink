@@ -1,31 +1,40 @@
 <template>
-  <div class="columns">
-    <div class="column is-8 is-offset-2">
-      <transition appear name="fade">
-        <h3 id="search-heading">Search Manga</h3>
-      </transition>
-      <transition appear name="slide-fade">
-        <b-field id="search-input">
-          <b-autocomplete placeholder="Eg. Haikyu!!" v-model="title" :data="mangaData" field="name"
-                          :loading="isFetching" @input="getData" @select="selectManga">
-            <template scope="props">
-              <div class="media">
-                <div class="media-left">
-                  <img width="64" :src="props.option.cover">
+  <div id="backdrop">
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <transition appear name="fade">
+          <h3 id="search-heading">Search Manga</h3>
+        </transition>
+        <transition appear name="slide-fade">
+          <b-field>
+            <b-autocomplete placeholder="Eg. Haikyu!!" v-model="title" :data="mangaData" field="name"
+                            :loading="isFetching" @input="getData" @select="selectManga">
+              <template scope="props">
+                <div class="media">
+                  <div class="media-left">
+                    <img width="64" :src="props.option.cover">
+                  </div>
+                  <div class="media-content">
+                    {{ props.option.name }}
+                    <br>
+                    <b-taglist style="font-family: 'Roboto', sans-serif; margin-top: 1.5%">
+                      <b-tag type="is-dark" v-for="genre in props.option.genres" :key="genre.id">{{ genre }} </b-tag>
+                    </b-taglist>
+                  </div>
                 </div>
-                <div class="media-content">
-                  {{ props.option.name }}
-                  <br>
-                  <b-taglist style="font-family: 'Roboto', sans-serif; margin-top: 2%">
-                    <b-tag type="is-dark" v-for="genre in props.option.genres">{{ genre }} </b-tag>
-                  </b-taglist>
-                </div>
-              </div>
-            </template>
-          </b-autocomplete>
-        </b-field>
-      </transition>
+              </template>
+            </b-autocomplete>
+          </b-field>
+        </transition>
+      </div>
     </div>
+    <transition name="slide-fade">
+      <div class="columns" v-if="showManga">
+        <div class="column is-10 is-offset-1">
+          <manga-box :manga-data="mangaBoxData"></manga-box>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -34,12 +43,16 @@
   import BField from "../../node_modules/buefy/src/components/field/Field.vue";
   import debounce from 'lodash.debounce'
   import axios from 'axios'
+  import ajax from '../utilities/ajax'
   import BTaglist from "../../node_modules/buefy/src/components/tag/Taglist.vue";
+  import BTag from "../../node_modules/buefy/src/components/tag/Tag.vue";
+  import MangaBox from "../components/MangaBox.vue";
 
   export default {
     components: {
+      BTag,
       BTaglist,
-      BField, BAutocomplete
+      BField, BAutocomplete, MangaBox
     },
     data() {
       return {
@@ -47,7 +60,10 @@
         mangaData: [],
         isFetching: false,
         selected: null,
-        isFocused: false
+        isFocused: false,
+        searchDown: false,
+        showManga: false,
+        mangaBoxData: {}
       }
     },
     methods: {
@@ -55,6 +71,7 @@
         let self = this;
         this.mangaData = [];
         this.isFetching = true;
+
         axios.get('https://doodle-manga-scraper.p.mashape.com/mangareader.net/search', {
           params: {
             cover: 1,
@@ -66,32 +83,47 @@
             'X-Mashape-Key': '0scVXX9O09msh51PWISWbEzSK0nDp1PU7hkjsn8T3ddvspu36f'
           },
           validateStatus: function (status) {
-            return status < 400; // Reject only if the status code is greater than or equal to 500
+            return status < 400; // Reject only if the status code is greater than or equal to 400
           }
         }).then(response => {
           response.data.forEach(item => self.mangaData.push(item));
           self.isFetching = false;
-          console.log(response.data);
-        }).catch(error => {
+        }).catch(() => {
           self.isFetching = false;
-          console.log(error);
         })
-      }, 400),
+      }, 300),
       selectManga(option) {
         this.selected = option;
+        this.showManga = false;
+
+        ajax.get('manga', {
+          params: {
+            mangaId: option.mangaId
+          },
+          headers: {
+            'Authentication-Token': localStorage.getItem('authToken')
+          }
+        }).then(response => {
+          this.mangaBoxData = response.data;
+          this.showManga = true;
+        }).catch(error => {
+          console.log(error.response);
+        })
       }
     }
   }
 </script>
 
 <style scoped>
-  .columns {
+  #backdrop {
     background: linear-gradient(to left, #B24592, #F15F79);
     margin-left: 0;
     margin-right: 0;
-    margin-top: 0;
+    margin-top: 0.9%;
     padding-bottom: 2%;
     height: 100%;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
   }
 
   #search-heading {
@@ -103,20 +135,15 @@
     margin-bottom: 1%;
   }
 
-  #search-input {
-    font-family: "Lato", "Helvetica Neue", sans-serif;
-    font-weight: 300;
-  }
-
   .media-content {
     font-size: 1.5em;
   }
 
-  .slide-fade-enter-active {
+  .slide-fade-enter-active, .slide-fade-leave-active {
     transition: all .5s ease;
   }
 
-  .slide-fade-enter
+  .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active below version 2.1.8 */
   {
     transform: translateY(20px);

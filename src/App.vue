@@ -65,7 +65,7 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Poiret+One|Lato|Roboto');
+  @import url('https://fonts.googleapis.com/css?family=Poiret+One|Lato|Roboto|Open+Sans');
 
   html {
     height: 100%;
@@ -89,5 +89,9 @@
   nav.navbar {
     padding-top: 1%;
     padding-bottom: 1%;
+  }
+
+  .is-opened-top {
+    bottom: auto;
   }
 </style>
