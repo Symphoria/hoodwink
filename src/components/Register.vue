@@ -141,6 +141,7 @@
     margin-right: 0;
     margin-top: 0;
     padding-bottom: 1%;
+    height: 100%;
   }
 
   .input {

@@ -11,7 +11,7 @@
             <p><strong>Author: </strong>{{ getAuthor }}</p>
           </div>
           <div class="column is-3">
-            <p style=""><strong>Year of release: </strong>{{ releaseYear }}</p>
+            <p><strong>Year of release: </strong>{{ releaseYear }}</p>
           </div>
         </div>
         <div class="columns" style="margin-top: -1.5rem">
@@ -19,7 +19,7 @@
             <p><strong>Artist: </strong>{{ getArtist }}</p>
           </div>
           <div class="column is-3">
-            <p style=""><strong>Status: </strong>{{ status }}</p>
+            <p><strong>Status: </strong>{{ status }}</p>
           </div>
         </div>
         <b-taglist>
@@ -27,6 +27,21 @@
         </b-taglist>
         <p class="manga-info">{{ info }}</p>
         <p style="margin-top: 2%"><strong>Latest Chapter: </strong>{{ latestChapter }}</p>
+        <div class="columns" style="margin-top: 2%">
+          <div class="column is-8">
+            <div class="field is-grouped">
+              <p class="control">
+                <track-list-button></track-list-button>
+              </p>
+              <p class="control">
+                <bookmark-button></bookmark-button>
+              </p>
+            </div>
+          </div>
+          <div class="column is-4">
+            <a class="button read">Read</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -34,8 +49,11 @@
 
 <script>
   import ajax from '../utilities/ajax'
+  import TrackListButton from './utility_buttons/TracklistButton.vue'
+  import BookmarkButton from './utility_buttons/BookmarkButton.vue'
 
   export default {
+    components: {TrackListButton, BookmarkButton},
     props: ['mangaData'],
     data() {
       return {
@@ -125,5 +143,13 @@
     box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
     margin-top: 3%;
     padding-bottom: 2.5%;
+    margin-bottom: 2%;
+  }
+
+  .read {
+    background-color: #F15F79;
+    width: 100%;
+    color: white;
+    border: none;
   }
 </style>

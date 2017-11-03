@@ -29,11 +29,14 @@
       </div>
     </div>
     <transition name="slide-fade">
-      <div class="columns" v-if="showManga">
+      <div class="columns" v-show="showManga">
         <div class="column is-10 is-offset-1">
           <manga-box :manga-data="mangaBoxData"></manga-box>
         </div>
       </div>
+    </transition>
+    <transition name="searching" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+      <p class="searching" v-show="isSearching">Searching...</p>
     </transition>
   </div>
 </template>
@@ -63,7 +66,8 @@
         isFocused: false,
         searchDown: false,
         showManga: false,
-        mangaBoxData: {}
+        mangaBoxData: {},
+        isSearching: false
       }
     },
     methods: {
@@ -105,10 +109,13 @@
           }
         }).then(response => {
           this.mangaBoxData = response.data;
+          this.isSearching = false;
           this.showManga = true;
         }).catch(error => {
           console.log(error.response);
-        })
+        });
+
+        this.isSearching = true;
       }
     }
   }
@@ -119,11 +126,13 @@
     background: linear-gradient(to left, #B24592, #F15F79);
     margin-left: 0;
     margin-right: 0;
-    margin-top: 0.9%;
+    /*margin-top: 0.9%;*/
     padding-bottom: 2%;
-    height: 100%;
     padding-left: 0.5%;
     padding-right: 0.5%;
+    height: 88.3%;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   #search-heading {
@@ -137,6 +146,15 @@
 
   .media-content {
     font-size: 1.5em;
+  }
+
+  .searching {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: 300;
+    margin: 15%;
+    font-family: "Lato", "Helvetica Neue", sans-serif;
   }
 
   .slide-fade-enter-active, .slide-fade-leave-active {

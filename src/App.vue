@@ -90,8 +90,4 @@
     padding-top: 1%;
     padding-bottom: 1%;
   }
-
-  .is-opened-top {
-    bottom: auto;
-  }
 </style>
