@@ -62,12 +62,12 @@
         title: '',
         mangaData: [],
         isFetching: false,
-        selected: null,
         isFocused: false,
         searchDown: false,
         showManga: false,
         mangaBoxData: {},
-        isSearching: false
+        isSearching: false,
+        mangaId: ''
       }
     },
     methods: {
@@ -97,7 +97,6 @@
         })
       }, 300),
       selectManga(option) {
-        this.selected = option;
         this.showManga = false;
 
         ajax.get('manga', {
@@ -109,6 +108,7 @@
           }
         }).then(response => {
           this.mangaBoxData = response.data;
+          this.mangaBoxData.mangaId = option.mangaId;
           this.isSearching = false;
           this.showManga = true;
         }).catch(error => {

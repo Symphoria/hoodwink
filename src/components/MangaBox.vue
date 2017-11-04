@@ -31,7 +31,7 @@
           <div class="column is-8">
             <div class="field is-grouped">
               <p class="control">
-                <track-list-button></track-list-button>
+                <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"></track-list-button>
               </p>
               <p class="control">
                 <bookmark-button></bookmark-button>
@@ -66,7 +66,8 @@
         genres: [],
         info: '',
         latestChapter: 0,
-        inTracklist: false
+        inTracklist: false,
+        mangaId: ''
       }
     },
     computed: {
@@ -92,19 +93,8 @@
         this.info = newData.info;
         this.latestChapter = newData.latest_chapter;
         this.inTracklist = newData.inTrackList;
+        this.mangaId = newData.mangaId;
       }
-    },
-    beforeMount() {
-      this.title = this.mangaData.title;
-      this.coverUrl = this.mangaData.cover_art_url;
-      this.author = this.mangaData.author;
-      this.artist = this.mangaData.artist;
-      this.releaseYear = this.mangaData.year_of_release;
-      this.status = this.mangaData.status;
-      this.genres = this.mangaData.genres;
-      this.info = this.mangaData.info;
-      this.latestChapter = this.mangaData.latest_chapter;
-      this.inTracklist = this.mangaData.inTrackList;
     }
   }
 </script>
