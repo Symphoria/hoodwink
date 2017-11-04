@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="column is-4">
-            <a class="button read">Read</a>
+            <a class="button read" :href="mangaUrl" target="_blank">Read</a>
           </div>
         </div>
       </div>
@@ -67,7 +67,8 @@
         info: '',
         latestChapter: 0,
         inTracklist: false,
-        mangaId: ''
+        mangaId: '',
+        mangaUrl: ''
       }
     },
     computed: {
@@ -94,6 +95,7 @@
         this.latestChapter = newData.latest_chapter;
         this.inTracklist = newData.inTrackList;
         this.mangaId = newData.mangaId;
+        this.mangaUrl = newData.manga_url
       }
     }
   }

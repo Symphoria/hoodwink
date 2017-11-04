@@ -1,5 +1,5 @@
 <template>
-  <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" v-if="trackList">
+  <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" v-if="trackList" @click="removeFromTrackList">
     Remove from TrackList
   </a>
   <a class="button is-success" v-else @click="addToTrackList">Add to TrackList</a>
@@ -33,6 +33,35 @@
           this.$toast.open({
             duration: 4000,
             message: 'Manga Added to TrackList',
+            position: 'is-bottom',
+            type: 'is-success'
+          })
+        }).catch(() => {
+          this.trackListRequest = false;
+          this.$toast.open({
+            duration: 3000,
+            message: 'Oops! Something went wrong. Please try again later',
+            position: 'is-bottom',
+            type: 'is-danger'
+          })
+        })
+      },
+      removeFromTrackList() {
+        this.trackListRequest = true;
+
+        ajax.delete('tracklist', {
+          headers: {
+            'Authentication-Token': localStorage.getItem('authToken')
+          },
+          data: {
+            mangaId: this.mangaId
+          }
+        }).then(response => {
+          this.trackListRequest = false;
+          this.trackList = false;
+          this.$toast.open({
+            duration: 3000,
+            message: response.data.message,
             position: 'is-bottom',
             type: 'is-success'
           })
