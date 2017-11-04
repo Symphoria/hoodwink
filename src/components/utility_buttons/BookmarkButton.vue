@@ -1,9 +1,64 @@
 <template>
-  <a class="button is-success">Add Bookmark</a>
+  <a class="button is-success" @click="addBookmark">Add Bookmark</a>
 </template>
 
 <script>
-  export default {}
+  import ajax from '../../utilities/ajax'
+
+  export default {
+    props: ['mangaId', 'chapter'],
+    data() {
+      return {
+        mangaID: this.mangaId,
+        latestChapter: this.chapter
+      }
+    },
+    methods: {
+      addBookmark() {
+        this.$dialog.prompt({
+          message: 'Enter the chapter number',
+          inputAttrs: {
+            type: 'number',
+            placeholder: 'Chapter Number',
+            value: this.latestChapter.toString(),
+            min: 0
+          },
+          onConfirm: (value) => {
+            ajax.post('bookmarks', {
+              mangaId: this.mangaID,
+              chapter: value
+            }, {
+              headers: {
+                'Authentication-Token': localStorage.getItem('authToken')
+              }
+            }).then(() => {
+              this.$toast.open({
+                duration: 3000,
+                message: 'Bookmark added to chapter ' + value,
+                position: 'is-bottom',
+                type: 'is-success'
+              })
+            }).catch(() => {
+              this.$toast.open({
+                duration: 3000,
+                message: 'Oops! Something went wrong. Please try again later',
+                position: 'is-bottom',
+                type: 'is-danger'
+              })
+            })
+          }
+        })
+      }
+    },
+    watch: {
+      mangaId: function(newValue) {
+        this.mangaID = newValue
+      },
+      chapter: function(newValue) {
+        this.latestChapter = newValue
+      }
+    }
+  }
 </script>
 
 <style scoped>

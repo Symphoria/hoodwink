@@ -34,7 +34,7 @@
                 <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"></track-list-button>
               </p>
               <p class="control">
-                <bookmark-button></bookmark-button>
+                <bookmark-button :manga-id="mangaId" :chapter="latestChapter"></bookmark-button>
               </p>
             </div>
           </div>
