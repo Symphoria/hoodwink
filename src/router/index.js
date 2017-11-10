@@ -4,6 +4,7 @@ import Search from '../components/Search.vue'
 import Register from '../components/Register.vue'
 import Confirm from '../components/Confirm.vue'
 import Login from '../components/Login.vue'
+import TrackList from '../components/TrackList.vue'
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/tracklist',
+      name: 'tracklist',
+      component: TrackList
     }
   ]
 })

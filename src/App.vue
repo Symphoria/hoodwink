@@ -13,7 +13,7 @@
       </div>
       <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-start">
-          <router-link to="" class="navbar-item">Tracklist</router-link>
+          <router-link to="/tracklist" class="navbar-item">Tracklist</router-link>
           <router-link to="" class="navbar-item">Bookmarks</router-link>
         </div>
         <div class="navbar-end">
@@ -77,7 +77,7 @@
   }
 
   #app {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Open Sans', Helvetica, sans-serif;
     height: 100%;
   }
 

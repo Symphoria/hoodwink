@@ -130,7 +130,7 @@
     padding-bottom: 2%;
     padding-left: 0.5%;
     padding-right: 0.5%;
-    height: 88.3%;
+    height: 95%;
     overflow-x: hidden;
     overflow-y: visible;
   }

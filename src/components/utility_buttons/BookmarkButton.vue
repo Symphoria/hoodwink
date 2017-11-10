@@ -1,5 +1,5 @@
 <template>
-  <a class="button is-success" @click="addBookmark">Add Bookmark</a>
+  <a class="button is-primary" @click="addBookmark">Add Bookmark</a>
 </template>
 
 <script>
@@ -16,7 +16,7 @@
     methods: {
       addBookmark() {
         this.$dialog.prompt({
-          message: 'Enter the chapter number',
+          message: 'Enter the Chapter Number',
           inputAttrs: {
             type: 'number',
             placeholder: 'Chapter Number',
@@ -62,7 +62,5 @@
 </script>
 
 <style scoped>
-  .is-success {
-    background-color: #27AE60;
-  }
+
 </style>
