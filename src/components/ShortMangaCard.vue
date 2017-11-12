@@ -5,7 +5,9 @@
     <p class="updated" v-text="getUserFriendlyDate"></p>
     <div class="columns is-mobile">
       <div class="column">
-        <a class="button is-danger">Remove</a>
+        <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" @click="removeFromTrackList">
+          Remove
+        </a>
       </div>
       <div class="column">
         <a class="button is-info" :href="mangaUrl">Read</a>
@@ -16,6 +18,7 @@
 
 <script>
   import moment from 'moment';
+  import ajax from '../utilities/ajax'
 
   export default {
     props: ['mangaData'],
@@ -25,7 +28,8 @@
         lastUpdated: '',
         coverUrl: '',
         mangaUrl: '',
-        mangaId: ''
+        mangaId: '',
+        trackListRequest: false
       }
     },
     computed: {
@@ -34,7 +38,7 @@
       }
     },
     watch: {
-      mangaData: function(newData) {
+      mangaData: function (newData) {
         this.title = newData.title;
         this.lastUpdated = newData.last_updated;
         this.coverUrl = newData.cover_art_url;
@@ -42,7 +46,42 @@
         this.mangaId = newData.manga_id;
       }
     },
-    mounted: function() {
+    methods: {
+      removeFromTrackList() {
+        this.trackListRequest = true;
+
+        ajax.delete('tracklist', {
+          headers: {
+            'Authentication-Token': localStorage.getItem('authToken')
+          },
+          data: {
+            mangaId: this.mangaId
+          }
+        }).then(response => {
+          this.trackListRequest = false;
+          this.trackList = false;
+
+          this.$toast.open({
+            duration: 3000,
+            message: response.data.message,
+            position: 'is-bottom',
+            type: 'is-success'
+          });
+
+          this.$emit('removed-manga');
+        }).catch(() => {
+          this.trackListRequest = false;
+
+          this.$toast.open({
+            duration: 4000,
+            message: 'Oops! Something went wrong. Please try again later',
+            position: 'is-bottom',
+            type: 'is-danger'
+          })
+        })
+      }
+    },
+    mounted: function () {
       this.title = this.mangaData.title;
       this.lastUpdated = this.mangaData.last_updated;
       this.coverUrl = this.mangaData.cover_art_url;
