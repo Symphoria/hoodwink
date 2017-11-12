@@ -1,21 +1,55 @@
 <template>
   <div class="box">
-    <img src="http://s2.mangareader.net/cover/yahari-ore-no-seishun-rabukome-wa-machigatte-iru-mougenroku/yahari-ore-no-seishun-rabukome-wa-machigatte-iru-mougenroku-l0.jpg">
-    <h2 id="name">Yahari Ore no Seishun Rabukome wa Machigatte Iru</h2>
-    <p class="updated">November 10th 2017, 8:09 pm</p>
+    <img :src="coverUrl">
+    <h2 id="name">{{ title }}</h2>
+    <p class="updated" v-text="getUserFriendlyDate"></p>
     <div class="columns is-mobile">
       <div class="column">
         <a class="button is-danger">Remove</a>
       </div>
       <div class="column">
-        <a class="button is-info">Read</a>
+        <a class="button is-info" :href="mangaUrl">Read</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {}
+  import moment from 'moment';
+
+  export default {
+    props: ['mangaData'],
+    data() {
+      return {
+        title: '',
+        lastUpdated: '',
+        coverUrl: '',
+        mangaUrl: '',
+        mangaId: ''
+      }
+    },
+    computed: {
+      getUserFriendlyDate() {
+        return moment(this.lastUpdated).format('MMMM Do YYYY, h:mm a')
+      }
+    },
+    watch: {
+      mangaData: function(newData) {
+        this.title = newData.title;
+        this.lastUpdated = newData.last_updated;
+        this.coverUrl = newData.cover_art_url;
+        this.mangaUrl = newData.manga_url;
+        this.mangaId = newData.manga_id;
+      }
+    },
+    mounted: function() {
+      this.title = this.mangaData.title;
+      this.lastUpdated = this.mangaData.last_updated;
+      this.coverUrl = this.mangaData.cover_art_url;
+      this.mangaUrl = this.mangaData.manga_url;
+      this.mangaId = this.mangaData.manga_id;
+    }
+  }
 </script>
 
 <style scoped>

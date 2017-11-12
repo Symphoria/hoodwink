@@ -124,8 +124,10 @@
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
-    padding-bottom: 10%;
-    height: 105%;
+    height: 100%;
+    padding-bottom: 5%;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .input {
