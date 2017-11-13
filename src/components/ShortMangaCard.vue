@@ -10,7 +10,7 @@
         </a>
       </div>
       <div class="column">
-        <a class="button is-info" :href="mangaUrl">Read</a>
+        <a class="button is-info" :href="mangaUrl" target="_blank">Read</a>
       </div>
     </div>
   </div>

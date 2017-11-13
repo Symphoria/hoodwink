@@ -2,7 +2,9 @@
   <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" v-if="trackList" @click="removeFromTrackList">
     Remove from TrackList
   </a>
-  <a class="button is-success" v-else @click="addToTrackList">Add to TrackList</a>
+  <a :class="{'button is-success': true, 'is-loading': trackListRequest}" v-else="trackList" @click="addToTrackList">
+    Add to TrackList
+  </a>
 </template>
 
 <script>
@@ -30,6 +32,7 @@
         }).then(() => {
           this.trackListRequest = false;
           this.trackList = true;
+          this.inTrackList = true;
           this.$toast.open({
             duration: 4000,
             message: 'Manga Added to TrackList',
@@ -59,6 +62,7 @@
         }).then(response => {
           this.trackListRequest = false;
           this.trackList = false;
+          this.inTrackList = false;
           this.$toast.open({
             duration: 3000,
             message: response.data.message,
@@ -77,11 +81,11 @@
       }
     },
     watch: {
-      mangaId: function(newValue) {
+      mangaId: function (newValue) {
         this.mangaID = newValue;
       },
-      inTrackList: function(newValue) {
-        this.trackList = newValue;
+      inTrackList: function (newVal) {
+        this.trackList = newVal;
       }
     }
   }

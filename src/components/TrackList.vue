@@ -21,6 +21,10 @@
           </div>
         </transition>
       </div>
+      <nav class="pagination is-centered">
+        <a :class="{'pagination-previous': true, 'is-disabled': !hasPrevious}" @click="prevPage">Previous</a>
+        <a :class="{'pagination-next': true, 'is-disabled': !hasNext}" @click="nextPage">Next Page</a>
+      </nav>
     </div>
   </div>
 </template>
@@ -70,6 +74,14 @@
           let col = i % 3;
           this.mangaList[col].push(mangaData[i]);
         }
+      },
+      nextPage() {
+        this.page += 1;
+        this.refresh();
+      },
+      prevPage() {
+        this.page -= 1;
+        this.refresh();
       }
     }
   }
@@ -91,6 +103,16 @@
 
   .columns {
     margin-top: 2%;
+  }
+
+  .pagination-next {
+    color: white;
+    border-radius: 0;
+  }
+
+  .pagination-previous {
+    color: white;
+    border-radius: 0;
   }
 
   .slide-fade-enter-active, .slide-fade-leave-active {
