@@ -1,26 +1,24 @@
 <template>
   <div id="backdrop">
     <div class="container">
-      <div class="columns">
-        <transition appear name="slide-fade">
+      <p class="header" style="font-size: 3.5em">Tracklist</p>
+      <p class="header" style="font-size: 1.5em">View all your tracklisted manga here</p>
+      <transition name="slide-fade">
+        <div class="columns" v-if="trackListReady">
           <div class="column">
             <short-manga-card :manga-data="manga" v-for="manga in mangaList[0]" :key="manga.id"
                               @removed-manga="refresh"></short-manga-card>
           </div>
-        </transition>
-        <transition appear name="slide-fade">
           <div class="column">
             <short-manga-card :manga-data="manga" v-for="manga in mangaList[1]" :key="manga.id"
                               @removed-manga="refresh"></short-manga-card>
           </div>
-        </transition>
-        <transition appear name="slide-fade">
           <div class="column">
             <short-manga-card :manga-data="manga" v-for="manga in mangaList[2]" :key="manga.id"
                               @removed-manga="refresh"></short-manga-card>
           </div>
-        </transition>
-      </div>
+        </div>
+      </transition>
       <nav class="pagination is-centered">
         <a :class="{'pagination-previous': true, 'is-disabled': !hasPrevious}" @click="prevPage">Previous</a>
         <a :class="{'pagination-next': true, 'is-disabled': !hasNext}" @click="nextPage">Next Page</a>
@@ -41,14 +39,17 @@
         hasNext: false,
         hasPrevious: false,
         totalPages: 0,
-        mangaList: [[], [], []]
+        mangaList: [[], [], []],
+        trackListReady: false
       }
     },
-    mounted: function() {
+    mounted: function () {
       this.refresh();
     },
     methods: {
       refresh() {
+        this.trackListReady = false;
+
         ajax.get('tracklist', {
           params: {
             page: this.page
@@ -61,6 +62,7 @@
           this.hasPrevious = response.data.hasPrevious;
           this.totalPages = response.data.totalPages;
           this.segmentList(response.data.mangaData);
+          this.trackListReady = true;
         }).catch(error => {
           console.log(error.response);
         })
@@ -103,6 +105,13 @@
 
   .columns {
     margin-top: 2%;
+  }
+
+  .header {
+    font-family: "Lato", "Helvetica Neue", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 100;
   }
 
   .pagination-next {

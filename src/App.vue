@@ -77,8 +77,12 @@
   }
 
   #app {
-    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     height: 100%;
+  }
+
+  nav {
+    font-family: 'Open Sans', Helvetica, sans-serif;
   }
 
   #brand {
