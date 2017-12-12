@@ -5,6 +5,7 @@ import Register from '../components/Register.vue'
 import Confirm from '../components/Confirm.vue'
 import Login from '../components/Login.vue'
 import TrackList from '../components/TrackList.vue'
+import Bookmarks from '../components/Bookmarks.vue'
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/tracklist',
       name: 'tracklist',
       component: TrackList
+    },
+    {
+      path: '/bookmarks',
+      name: 'bookmarks',
+      component: Bookmarks
     }
   ]
 })

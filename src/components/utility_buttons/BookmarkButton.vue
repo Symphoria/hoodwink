@@ -1,5 +1,5 @@
 <template>
-  <a class="button is-primary" @click="addBookmark">Add Bookmark</a>
+  <a class="button is-primary" @click="addBookmark"><slot></slot></a>
 </template>
 
 <script>
@@ -15,12 +15,13 @@
     },
     methods: {
       addBookmark() {
+        const self = this;
         this.$dialog.prompt({
           message: 'Enter the Chapter Number',
           inputAttrs: {
             type: 'number',
             placeholder: 'Chapter Number',
-            value: this.latestChapter.toString(),
+            value: self.latestChapter.toString(),
             min: 0
           },
           onConfirm: (value) => {
@@ -32,6 +33,8 @@
                 'Authentication-Token': localStorage.getItem('authToken')
               }
             }).then(() => {
+              this.$emit('bookmark-updated', value);
+
               this.$toast.open({
                 duration: 3000,
                 message: 'Bookmark added to chapter ' + value,

@@ -14,7 +14,7 @@
       <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-start">
           <router-link to="/tracklist" class="navbar-item">Tracklist</router-link>
-          <router-link to="" class="navbar-item">Bookmarks</router-link>
+          <router-link to="/bookmarks" class="navbar-item">Bookmarks</router-link>
         </div>
         <div class="navbar-end">
           <router-link to="/search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search

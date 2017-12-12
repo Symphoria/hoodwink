@@ -1,10 +1,10 @@
 <template>
   <div id="backdrop">
     <div class="container">
-      <p class="header" style="font-size: 3.5em">Tracklist</p>
-      <p class="header" style="font-size: 1.5em">View all your tracklisted manga here</p>
+      <p class="header" style="font-size: 3.5em">Bookmarks</p>
+      <p class="header" style="font-size: 1.5em">View all your bookmarked manga here</p>
       <transition name="slide-fade">
-        <div class="columns" v-if="trackListReady">
+        <div class="columns" v-if="bookmarksReady">
           <div class="column">
             <short-manga-card :manga-data="manga" v-for="manga in mangaList[0]" :key="manga.id"
                               @removed-manga="refresh"></short-manga-card>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import ShortMangaCard from './TrackListCard.vue'
+  import ShortMangaCard from './BookmarkCard.vue'
   import ajax from '../utilities/ajax'
 
   export default {
@@ -40,7 +40,7 @@
         hasPrevious: false,
         totalPages: 0,
         mangaList: [[], [], []],
-        trackListReady: false
+        bookmarksReady: false
       }
     },
     mounted: function () {
@@ -48,9 +48,9 @@
     },
     methods: {
       refresh() {
-        this.trackListReady = false;
+        this.bookmarksReady = false;
 
-        ajax.get('tracklist', {
+        ajax.get('bookmarks', {
           params: {
             page: this.page
           },
@@ -62,7 +62,7 @@
           this.hasPrevious = response.data.hasPrevious;
           this.totalPages = response.data.totalPages;
           this.segmentList(response.data.mangaData);
-          this.trackListReady = true;
+          this.bookmarksReady = true;
         }).catch(error => {
           console.log(error.response);
         })
