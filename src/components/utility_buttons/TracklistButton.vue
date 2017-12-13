@@ -24,7 +24,7 @@
         this.trackListRequest = true;
 
         ajax.post('tracklist', {
-          mangaId: this.mangaId
+          mangaId: this.mangaID
         }, {
           headers: {
             'Authentication-Token': localStorage.getItem('authToken')
@@ -32,7 +32,6 @@
         }).then(() => {
           this.trackListRequest = false;
           this.trackList = true;
-          this.inTrackList = true;
           this.$toast.open({
             duration: 4000,
             message: 'Manga Added to TrackList',
@@ -57,12 +56,11 @@
             'Authentication-Token': localStorage.getItem('authToken')
           },
           data: {
-            mangaId: this.mangaId
+            mangaId: this.mangaID
           }
         }).then(response => {
           this.trackListRequest = false;
           this.trackList = false;
-          this.inTrackList = false;
           this.$toast.open({
             duration: 3000,
             message: response.data.message,
@@ -81,11 +79,12 @@
       }
     },
     watch: {
-      mangaId: function (newValue) {
-        this.mangaID = newValue;
+      mangaId: function(newVal) {
+        this.mangaID = newVal;
+        this.trackList = this.inTrackList
       },
-      inTrackList: function (newVal) {
-        this.trackList = newVal;
+      inTrackList: function(newVal) {
+        this.trackList = newVal
       }
     }
   }

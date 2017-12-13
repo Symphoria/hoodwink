@@ -43,6 +43,8 @@
 </template>
 
 <script>
+  import ajax from './utilities/ajax'
+
   export default {
     name: 'app',
     data() {
@@ -59,6 +61,21 @@
         localStorage.removeItem('authToken');
         this.isLoggedIn = false;
         this.$router.replace({ name: 'login' })
+      }
+    },
+    mounted() {
+      const authToken = localStorage.getItem('authToken');
+
+      if (authToken !== null) {
+        ajax.put('check-token', {
+          token: authToken
+        }).then(response => {
+          this.isLoggedIn = response.data.isValid;
+
+          if (!response.data.isValid) {
+            localStorage.removeItem('authToken');
+          }
+        })
       }
     }
   }
