@@ -82,9 +82,6 @@
       mangaId: function(newVal) {
         this.mangaID = newVal;
         this.trackList = this.inTrackList
-      },
-      inTrackList: function(newVal) {
-        this.trackList = newVal
       }
     }
   }

@@ -9,7 +9,7 @@ import Bookmarks from '../components/Bookmarks.vue'
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/search',
@@ -34,12 +34,31 @@ export default new Router({
     {
       path: '/tracklist',
       name: 'tracklist',
-      component: TrackList
+      component: TrackList,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/bookmarks',
       name: 'bookmarks',
-      component: Bookmarks
+      component: Bookmarks,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  let tokenPresent = localStorage.getItem('authToken') !== null;
+
+  if (!requiresAuth || (requiresAuth && tokenPresent)) {
+    next()
+  } else {
+    next('login')
+  }
+});
+
+export default router
