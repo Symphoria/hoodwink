@@ -1,8 +1,12 @@
 <template>
   <div id="backdrop">
     <div class="container">
-      <p class="header" style="font-size: 3.5em">Bookmarks</p>
-      <p class="header" style="font-size: 1.5em">View all your bookmarked manga here</p>
+      <transition appear name="fade">
+        <div>
+          <p class="header" style="font-size: 3.5em">Bookmarks</p>
+          <p class="header" style="font-size: 1.5em">View all your bookmarked manga here</p>
+        </div>
+      </transition>
       <transition name="slide-fade">
         <div class="columns" v-if="bookmarksReady">
           <div class="column">
@@ -132,6 +136,14 @@
     /* .slide-fade-leave-active below version 2.1.8 */
   {
     transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .fade-enter-active {
+    transition: all .5s ease;
+  }
+
+  .fade-enter {
     opacity: 0;
   }
 </style>

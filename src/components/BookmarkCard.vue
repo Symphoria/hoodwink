@@ -97,6 +97,11 @@
 <style scoped>
   .box {
     text-align: center;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   }
 
   #name {

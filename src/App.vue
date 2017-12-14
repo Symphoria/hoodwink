@@ -21,7 +21,7 @@
           </router-link>
           <div class="field has-addons navbar-item" v-if="isLoggedIn">
             <p class="control">
-              <router-link to="" class="button is-primary">My Account</router-link>
+              <router-link to="/my-account" class="button is-primary">My Account</router-link>
             </p>
             <p class="control">
               <a class="button is-outlined" @click="logOut">Log Out</a>
@@ -38,7 +38,7 @@
         </div>
       </div>
     </nav>
-    <router-view @logged-in="isLoggedIn = true"></router-view>
+    <router-view @logged-in="isLoggedIn = true" @logged-out="logOut"></router-view>
   </div>
 </template>
 

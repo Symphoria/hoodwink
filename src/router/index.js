@@ -6,6 +6,7 @@ import Confirm from '../components/Confirm.vue'
 import Login from '../components/Login.vue'
 import TrackList from '../components/TrackList.vue'
 import Bookmarks from '../components/Bookmarks.vue'
+import MyAccount from '../components/MyAccount'
 
 Vue.use(Router);
 
@@ -43,6 +44,14 @@ let router = new Router({
       path: '/bookmarks',
       name: 'bookmarks',
       component: Bookmarks,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/my-account',
+      name: 'my-account',
+      component: MyAccount,
       meta: {
         requiresAuth: true
       }
