@@ -18,6 +18,11 @@ let router = new Router({
       component: Search
     },
     {
+      path: '/search',
+      name: 'search',
+      component: Search
+    },
+    {
       path: '/register',
       name: 'register',
       component: Register

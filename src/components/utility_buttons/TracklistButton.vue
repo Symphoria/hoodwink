@@ -23,30 +23,34 @@
       addToTrackList() {
         this.trackListRequest = true;
 
-        ajax.post('tracklist', {
-          mangaId: this.mangaID
-        }, {
-          headers: {
-            'Authentication-Token': localStorage.getItem('authToken')
-          }
-        }).then(() => {
-          this.trackListRequest = false;
-          this.trackList = true;
-          this.$toast.open({
-            duration: 4000,
-            message: 'Manga Added to TrackList',
-            position: 'is-bottom',
-            type: 'is-success'
+        if (localStorage.getItem('authToken') !== null) {
+          ajax.post('tracklist', {
+            mangaId: this.mangaID
+          }, {
+            headers: {
+              'Authentication-Token': localStorage.getItem('authToken')
+            }
+          }).then(() => {
+            this.trackListRequest = false;
+            this.trackList = true;
+            this.$toast.open({
+              duration: 4000,
+              message: 'Manga Added to TrackList',
+              position: 'is-bottom',
+              type: 'is-success'
+            })
+          }).catch(() => {
+            this.trackListRequest = false;
+            this.$toast.open({
+              duration: 3000,
+              message: 'Oops! Something went wrong. Please try again later',
+              position: 'is-bottom',
+              type: 'is-danger'
+            })
           })
-        }).catch(() => {
-          this.trackListRequest = false;
-          this.$toast.open({
-            duration: 3000,
-            message: 'Oops! Something went wrong. Please try again later',
-            position: 'is-bottom',
-            type: 'is-danger'
-          })
-        })
+        } else {
+          this.$router.replace({name: 'login'})
+        }
       },
       removeFromTrackList() {
         this.trackListRequest = true;

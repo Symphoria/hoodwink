@@ -98,14 +98,19 @@
       }, 300),
       selectManga(option) {
         this.showManga = false;
+        let headersObj = {};
+
+        if (localStorage.getItem('authToken') !== null) {
+          headersObj = {
+            'Authentication-Token': localStorage.getItem('authToken')
+          }
+        }
 
         ajax.get('manga', {
           params: {
             mangaId: option.mangaId
           },
-          headers: {
-            'Authentication-Token': localStorage.getItem('authToken')
-          }
+          headers: headersObj
         }).then(response => {
           this.mangaBoxData = response.data;
           this.mangaBoxData.mangaId = option.mangaId;
