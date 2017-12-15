@@ -70,12 +70,25 @@
               </div>
             </div>
           </transition>
-          <center>
-            <a :class="{'button is-success': true, 'is-loading': onGoingRequest}" id="submit-button"
-               @click="saveDetails">
-              Save
-            </a>
-          </center>
+          <div class="columns">
+            <div class="column">
+              <div class="field is-grouped is-grouped-left">
+                <p class="control">
+                  <delete-account-button @logged-out="logOut"></delete-account-button>
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="field is-grouped is-grouped-right">
+                <p class="control">
+                  <a :class="{'button is-success': true, 'is-loading': onGoingRequest}" id="submit-button"
+                     @click="saveDetails">
+                    Save
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </transition>
     </div>
@@ -85,9 +98,10 @@
 <script>
   import BInput from "buefy/src/components/input/Input";
   import ajax from '../utilities/ajax'
+  import DeleteAccountButton from "./utility_buttons/DeleteAccountButton"
 
   export default {
-    components: {BInput},
+    components: {BInput, DeleteAccountButton},
     name: "my-account",
     data() {
       return {
@@ -111,6 +125,9 @@
       }
     },
     methods: {
+      logOut() {
+        this.$emit('logged-out')
+      },
       validateEmail() {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(this.email.toLowerCase());
@@ -229,7 +246,7 @@
     font-size: 0.9em;
   }
 
-  #submit-button {
+  .is-grouped {
     margin-top: 2%;
     margin-bottom: 2%;
   }
