@@ -9,7 +9,9 @@
                          @bookmark-updated="(value) => this.chapter = value">Update</bookmark-button>
       </div>
       <div class="column">
-        <a :class="{'button is-danger': true, 'is-loading': bookmarkRequest}" @click="removeBookmark">Remove</a>
+        <a :class="{'button is-danger is-outlined': true, 'is-loading': bookmarkRequest}" @click="removeBookmark">
+          Remove
+        </a>
       </div>
       <div class="column">
         <a class="button is-info" :href="getChapterUrl" target="_blank">Read</a>

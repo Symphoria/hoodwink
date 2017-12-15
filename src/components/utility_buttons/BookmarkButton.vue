@@ -1,5 +1,7 @@
 <template>
-  <a class="button is-primary" @click="addBookmark"><slot></slot></a>
+  <a class="button is-primary" @click="addBookmark">
+    <i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;<slot></slot>
+  </a>
 </template>
 
 <script>

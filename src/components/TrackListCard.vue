@@ -5,7 +5,7 @@
     <p class="updated" v-text="getUserFriendlyDate"></p>
     <div class="columns is-mobile">
       <div class="column">
-        <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" @click="removeFromTrackList">
+        <a :class="{'button is-danger is-outlined': true, 'is-loading': trackListRequest}" @click="removeFromTrackList">
           Remove
         </a>
       </div>

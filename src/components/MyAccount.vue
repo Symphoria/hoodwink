@@ -70,7 +70,7 @@
               </div>
             </div>
           </transition>
-          <div class="columns">
+          <div class="columns" style="margin-top: 2%">
             <div class="column">
               <div class="field is-grouped is-grouped-left">
                 <p class="control">

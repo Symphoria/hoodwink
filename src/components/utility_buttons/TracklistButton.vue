@@ -1,9 +1,9 @@
 <template>
-  <a :class="{'button is-danger': true, 'is-loading': trackListRequest}" v-if="trackList" @click="removeFromTrackList">
+  <a :class="{'button is-danger is-outlined': true, 'is-loading': trackListRequest}" v-if="trackList" @click="removeFromTrackList">
     Remove from TrackList
   </a>
   <a :class="{'button is-success': true, 'is-loading': trackListRequest}" v-else="trackList" @click="addToTrackList">
-    Add to TrackList
+    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add to TrackList
   </a>
 </template>
 

@@ -28,8 +28,8 @@
         <p class="manga-info">{{ info }}</p>
         <p style="margin-top: 2%"><strong>Latest Chapter: </strong>{{ latestChapter }}</p>
         <div class="columns" style="margin-top: 2%">
-          <div class="column is-8">
-            <div class="field is-grouped">
+          <div class="column">
+            <div class="field is-grouped is-grouped-left">
               <p class="control">
                 <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"></track-list-button>
               </p>
@@ -38,8 +38,12 @@
               </p>
             </div>
           </div>
-          <div class="column is-4">
-            <a class="button read" :href="mangaUrl" target="_blank">Read</a>
+          <div class="column">
+            <div class="field is-grouped is-grouped-right">
+              <p class="control" style="width: 100%;">
+                <a class="button read" :href="mangaUrl" target="_blank">Read</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -83,7 +87,7 @@
       }
     },
     watch: {
-      mangaData: function(newData) {
+      mangaData: function (newData) {
         this.title = newData.title;
         this.coverUrl = newData.cover_art_url;
         this.author = newData.author;
