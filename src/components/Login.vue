@@ -22,6 +22,7 @@
             </span>
             </p>
           </div>
+          <center><forget-password-button></forget-password-button></center>
           <div class="field is-grouped is-grouped-centered">
             <p class="control">
               <a :class="{'button is-primary is-medium': true, 'is-loading': isLoading}"
@@ -62,9 +63,10 @@
   import GithubButton from './social_buttons/GithubOauth.vue'
   import ajax from '../utilities/ajax'
   import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
+  import ForgetPasswordButton from "./utility_buttons/ForgetPasswordButton"
 
   export default {
-    components: {FacebookButton, GoogleButton, TwitterButton, GithubButton, BNotification},
+    components: {FacebookButton, GoogleButton, TwitterButton, GithubButton, BNotification, ForgetPasswordButton},
     data() {
       return {
         usernameOrEmail: '',
