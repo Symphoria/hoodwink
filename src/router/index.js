@@ -7,6 +7,7 @@ import Login from '../components/Login.vue'
 import TrackList from '../components/TrackList.vue'
 import Bookmarks from '../components/Bookmarks.vue'
 import MyAccount from '../components/MyAccount'
+import ForgetPassword from '../components/ForgetPassword'
 
 Vue.use(Router);
 
@@ -60,6 +61,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/forgot-password/:activationToken',
+      name: 'forgot-password',
+      component: ForgetPassword
     }
   ]
 });
