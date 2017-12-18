@@ -32,8 +32,8 @@
             </div>
           </div>
           <center>
-            <a class="button" id="change-password" @click="showChangePassword = !showChangePassword">Change
-              Password&nbsp
+            <a class="button" id="change-password" @click="showChangePassword = !showChangePassword">
+              Change Password&nbsp;
               <i class="fa fa-chevron-up" aria-hidden="true" v-if="showChangePassword"></i>
               <i class="fa fa-chevron-down" aria-hidden="true" v-else></i>
             </a>

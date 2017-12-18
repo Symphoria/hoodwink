@@ -11,6 +11,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 var loadMinified = require('./load-minified')
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -34,11 +35,17 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   sourceMap: true,
+    //   uglifyOptions: { ecma: 8 },
+    //   beautify: false
+    // }),
+    new UglifyJSPlugin({
+      sourceMap: true,
+      uglifyOptions: { ecma: 8 },
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -106,7 +113,25 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
-      stripPrefix: 'dist/'
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/use\.fontawesome\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^http:\/\/(\w+)\.mangareader\.net\/cover\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: new RegExp('http://127.0.0.1:8000/'),
+          handler: 'networkFirst'
+        }
+      ]
     })
   ]
 })

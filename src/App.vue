@@ -65,6 +65,7 @@
     },
     mounted() {
       const authToken = localStorage.getItem('authToken');
+      let isOnline = navigator.onLine;
 
       if (authToken !== null) {
         ajax.put('check-token', {
@@ -72,8 +73,10 @@
         }).then(response => {
           this.isLoggedIn = response.data.isValid;
 
-          if (!response.data.isValid) {
+          if (!response.data.isValid && isOnline) {
             localStorage.removeItem('authToken');
+          } else {
+            this.isLoggedIn = true;
           }
         })
       }
