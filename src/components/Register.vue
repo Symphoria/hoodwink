@@ -12,6 +12,7 @@
               <i class="fa fa-user"></i>
             </span>
               </p>
+              <p class="help is-danger" v-show="isUsernameEmpty">Please enter a valid username</p>
             </div>
             <div class="field">
               <p class="control has-icons-left">
@@ -20,6 +21,7 @@
               <i class="fa fa-lock"></i>
             </span>
               </p>
+              <p class="help is-danger" v-show="isPasswordEmpty">Please enter a password</p>
             </div>
             <div class="field">
               <p class="control has-icons-left">
@@ -28,6 +30,7 @@
               <i class="fa fa-envelope"></i>
             </span>
               </p>
+              <p class="help is-danger" v-show="isEmailEmpty">Please enter a valid email</p>
             </div>
             <div class="field is-grouped is-grouped-centered">
               <p class="control">
@@ -80,27 +83,46 @@
         email: '',
         isLoading: false,
         errorMessage: '',
-        hasError: false
+        hasError: false,
+        isUsernameEmpty: false,
+        isPasswordEmpty: false,
+        isEmailEmpty: false
       }
     },
     methods: {
+      validateEmail() {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(this.email.toLowerCase());
+      },
+      validateAll() {
+        this.isUsernameEmpty = this.username === '';
+        this.isPasswordEmpty = this.password === '';
+        this.isEmailEmpty = this.email === '' || !validateEmail();
+      },
+      resetAll() {
+        this.isUsernameEmpty = this.isPasswordEmpty = this.isEmailEmpty = false;
+      },
       submitForm() {
-        this.isLoading = true;
-        this.hasError = false;
-        ajax.post('register', {
-          username: this.username.trim(),
-          password: this.password.trim(),
-          email: this.email.trim(),
-          viaOauth: false
-        }).then(response => {
-          this.username = this.password = this.email = '';
-          this.isLoading = false;
-          this.openSnackbar();
-        }).catch(error => {
-          this.isLoading = false;
-          this.errorMessage = error.response.data.message;
-          this.hasError = true;
-        })
+        if (this.validateAll()) {
+          this.isLoading = true;
+          this.hasError = false;
+          ajax.post('register', {
+            username: this.username.trim(),
+            password: this.password.trim(),
+            email: this.email.trim(),
+            viaOauth: false
+          }).then(response => {
+            this.resetAll();
+            this.username = this.password = this.email = '';
+            this.isLoading = false;
+            this.openSnackbar();
+          }).catch(error => {
+            this.resetAll();
+            this.isLoading = false;
+            this.errorMessage = error.response.data.message;
+            this.hasError = true;
+          })
+        }
       },
       openSnackbar() {
         this.$snackbar.open({

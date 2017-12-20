@@ -8,13 +8,14 @@ import TrackList from '../components/TrackList.vue'
 import Bookmarks from '../components/Bookmarks.vue'
 import MyAccount from '../components/MyAccount'
 import ForgetPassword from '../components/ForgetPassword'
+import About from '../components/About'
 
 Vue.use(Router);
 
 let router = new Router({
   routes: [
     {
-      path: '/search',
+      path: '/',
       name: 'search',
       component: Search
     },
@@ -66,6 +67,11 @@ let router = new Router({
       path: '/forgot-password/:activationToken',
       name: 'forgot-password',
       component: ForgetPassword
+    },
+    {
+      path: 'about',
+      name: 'about',
+      component: About
     }
   ]
 });

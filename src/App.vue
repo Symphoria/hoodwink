@@ -13,11 +13,12 @@
       </div>
       <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-start">
-          <router-link to="tracklist" class="navbar-item">Tracklist</router-link>
-          <router-link to="bookmarks" class="navbar-item">Bookmarks</router-link>
+          <router-link to="/about" class="navbar-item">About</router-link>
+          <router-link to="/tracklist" class="navbar-item">Tracklist</router-link>
+          <router-link to="/bookmarks" class="navbar-item">Bookmarks</router-link>
         </div>
         <div class="navbar-end">
-          <router-link to="search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
+          <router-link to="/search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
           </router-link>
           <div class="field has-addons navbar-item" v-if="isLoggedIn">
             <p class="control">
@@ -39,15 +40,6 @@
       </div>
     </nav>
     <router-view @logged-in="isLoggedIn = true" @logged-out="logOut"></router-view>
-    <!--<div class="my-footer">-->
-      <!--<p id="footer-made">-->
-        <!--Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank" style="color: #80deea;">@Symphoria</a>) with-->
-        <!--<i class="fa fa-laptop" aria-hidden="true"></i>,-->
-        <!--<i class="fa fa-wifi" aria-hidden="true"></i> and-->
-        <!--<i class="fa fa-heart" aria-hidden="true"></i>-->
-      <!--</p>-->
-      <!--<p>Learn more about me, or better contact me.</p>-->
-    <!--</div>-->
   </div>
 </template>
 

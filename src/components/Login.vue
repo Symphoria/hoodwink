@@ -9,18 +9,16 @@
           <div class="field">
             <p class="control has-icons-left">
               <input class="input is-medium" placeholder="Enter Username or Email" v-model="usernameOrEmail"/>
-              <span class="icon is-left">
-              <i class="fa fa-user"></i>
-            </span>
+              <span class="icon is-left"><i class="fa fa-user"></i></span>
             </p>
+            <p class="help is-danger" v-show="isUsernameEmpty">Please enter a registered username or email</p>
           </div>
           <div class="field">
             <p class="control has-icons-left">
               <input class="input is-medium" type="password" v-model="password" placeholder="Enter Password"/>
-              <span class="icon is-left">
-              <i class="fa fa-lock"></i>
-            </span>
+              <span class="icon is-left"><i class="fa fa-lock"></i></span>
             </p>
+            <p class="help is-danger" v-show="isPasswordEmpty">Please enter a password</p>
           </div>
           <center><forget-password-button></forget-password-button></center>
           <div class="field is-grouped is-grouped-centered">
@@ -73,28 +71,38 @@
         password: '',
         hasError: false,
         isLoading: false,
-        errorMessage: ''
+        errorMessage: '',
+        isUsernameEmpty: false,
+        isPasswordEmpty: false
       }
     },
     methods: {
+      validateAll() {
+        this.isPasswordEmpty = this.password === '';
+        this.isUsernameEmpty = this.usernameOrEmail === '';
+      },
       submitForm() {
-        this.isLoading = true;
-        this.hasError = false;
-        ajax.post('login', {
-          usernameOrEmail: this.usernameOrEmail.trim(),
-          password: this.password.trim(),
-          viaOauth: false
-        }).then(response => {
-          this.usernameOrEmail = this.password = '';
-          localStorage.setItem('authToken', response.data.authToken);
-          this.isLoading = false;
-          this.$emit('logged-in');
-          this.$router.replace({ name: 'search' })
-        }).catch(error => {
-          this.isLoading = false;
-          this.errorMessage = error.response.data.message;
-          this.hasError = true;
-        })
+        if (this.validateAll()) {
+          this.isLoading = true;
+          this.hasError = false;
+          ajax.post('login', {
+            usernameOrEmail: this.usernameOrEmail.trim(),
+            password: this.password.trim(),
+            viaOauth: false
+          }).then(response => {
+            this.isUsernameEmpty = this.isPasswordEmpty = false;
+            this.usernameOrEmail = this.password = '';
+            localStorage.setItem('authToken', response.data.authToken);
+            this.isLoading = false;
+            this.$emit('logged-in');
+            this.$router.replace({ name: 'search' })
+          }).catch(error => {
+            this.isUsernameEmpty = this.isPasswordEmpty = false;
+            this.isLoading = false;
+            this.errorMessage = error.response.data.message;
+            this.hasError = true;
+          })
+        }
       },
       oauthSignUp(email) {
         const loadingComponent = this.$loading.open();
