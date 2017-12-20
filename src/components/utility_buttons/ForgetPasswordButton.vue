@@ -44,7 +44,7 @@
 <style scoped>
   .button {
     font-size: 0.9em;
-    color: gray;
+    color: #808080;
     margin-bottom: 2%;
   }
 </style>

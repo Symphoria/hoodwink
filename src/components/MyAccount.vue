@@ -220,12 +220,13 @@
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
     padding-left: 0.5%;
     padding-right: 0.5%;
     height: 95%;
     overflow-x: hidden;
     overflow-y: visible;
+    /*flex: 1 0 auto;*/
   }
 
   .box {

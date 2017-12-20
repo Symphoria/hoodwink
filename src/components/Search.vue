@@ -1,43 +1,55 @@
 <template>
   <div id="backdrop">
-    <div class="columns">
-      <div class="column is-8 is-offset-2">
-        <transition appear name="fade">
-          <h3 id="search-heading">Search Manga</h3>
-        </transition>
-        <transition appear name="slide-fade">
-          <b-field>
-            <b-autocomplete placeholder="Eg. Haikyu!!" v-model="title" :data="mangaData" field="name"
-                            :loading="isFetching" @input="getData" @select="selectManga">
-              <template scope="props">
-                <div class="media">
-                  <div class="media-left">
-                    <img width="64" :src="props.option.cover">
+    <div style="min-height: calc(100vh - 70px);">
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <transition appear name="fade">
+            <h3 id="search-heading">Search Manga</h3>
+          </transition>
+          <transition appear name="slide-fade">
+            <b-field>
+              <b-autocomplete placeholder="Eg. Haikyu!!" v-model="title" :data="mangaData" field="name"
+                              :loading="isFetching" @input="getData" @select="selectManga">
+                <template scope="props">
+                  <div class="media">
+                    <div class="media-left">
+                      <img width="64" :src="props.option.cover">
+                    </div>
+                    <div class="media-content">
+                      {{ props.option.name }}
+                      <br>
+                      <b-taglist style="font-family: 'Roboto', sans-serif; margin-top: 1.5%">
+                        <b-tag type="is-dark" v-for="genre in props.option.genres" :key="genre.id">{{ genre }}</b-tag>
+                      </b-taglist>
+                    </div>
                   </div>
-                  <div class="media-content">
-                    {{ props.option.name }}
-                    <br>
-                    <b-taglist style="font-family: 'Roboto', sans-serif; margin-top: 1.5%">
-                      <b-tag type="is-dark" v-for="genre in props.option.genres" :key="genre.id">{{ genre }} </b-tag>
-                    </b-taglist>
-                  </div>
-                </div>
-              </template>
-            </b-autocomplete>
-          </b-field>
-        </transition>
-      </div>
-    </div>
-    <transition name="slide-fade">
-      <div class="columns" v-show="showManga">
-        <div class="column is-10 is-offset-1">
-          <manga-box :manga-data="mangaBoxData"></manga-box>
+                </template>
+              </b-autocomplete>
+            </b-field>
+          </transition>
         </div>
       </div>
-    </transition>
-    <transition name="searching" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-      <p class="searching" v-show="isSearching">Searching...</p>
-    </transition>
+      <transition name="slide-fade">
+        <div class="columns" v-show="showManga">
+          <div class="column is-10 is-offset-1">
+            <manga-box :manga-data="mangaBoxData"></manga-box>
+          </div>
+        </div>
+      </transition>
+      <transition name="searching" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+        <p class="searching" v-show="isSearching">Searching...</p>
+      </transition>
+    </div>
+    <div class="my-footer is-size-7-mobile">
+      <p id="footer-made">
+        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank"
+                                 style="color: #80deea;">@Symphoria</a>) with
+        <i class="fa fa-laptop" aria-hidden="true"></i>,
+        <i class="fa fa-wifi" aria-hidden="true"></i> and
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </p>
+      <p>Learn more about me, or better contact me.</p>
+    </div>
   </div>
 </template>
 
@@ -132,10 +144,10 @@
     margin-left: 0;
     margin-right: 0;
     /*margin-top: 0.9%;*/
-    padding-bottom: 2%;
     padding-left: 0.5%;
     padding-right: 0.5%;
-    height: 95%;
+    /*height: 95%;*/
+    min-height: calc(100vh - 70px);
     overflow-x: hidden;
     overflow-y: visible;
   }

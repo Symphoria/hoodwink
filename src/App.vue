@@ -13,11 +13,11 @@
       </div>
       <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}">
         <div class="navbar-start">
-          <router-link to="/tracklist" class="navbar-item">Tracklist</router-link>
-          <router-link to="/bookmarks" class="navbar-item">Bookmarks</router-link>
+          <router-link to="tracklist" class="navbar-item">Tracklist</router-link>
+          <router-link to="bookmarks" class="navbar-item">Bookmarks</router-link>
         </div>
         <div class="navbar-end">
-          <router-link to="/search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
+          <router-link to="search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
           </router-link>
           <div class="field has-addons navbar-item" v-if="isLoggedIn">
             <p class="control">
@@ -39,6 +39,15 @@
       </div>
     </nav>
     <router-view @logged-in="isLoggedIn = true" @logged-out="logOut"></router-view>
+    <!--<div class="my-footer">-->
+      <!--<p id="footer-made">-->
+        <!--Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank" style="color: #80deea;">@Symphoria</a>) with-->
+        <!--<i class="fa fa-laptop" aria-hidden="true"></i>,-->
+        <!--<i class="fa fa-wifi" aria-hidden="true"></i> and-->
+        <!--<i class="fa fa-heart" aria-hidden="true"></i>-->
+      <!--</p>-->
+      <!--<p>Learn more about me, or better contact me.</p>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -60,25 +69,33 @@
       logOut() {
         localStorage.removeItem('authToken');
         this.isLoggedIn = false;
-        this.$router.replace({ name: 'login' })
+        this.$router.replace({name: 'login'})
       }
     },
     mounted() {
       const authToken = localStorage.getItem('authToken');
-      let isOnline = navigator.onLine;
 
       if (authToken !== null) {
-        ajax.put('check-token', {
-          token: authToken
-        }).then(response => {
-          this.isLoggedIn = response.data.isValid;
+        if (navigator.onLine) {
+          ajax.put('check-token', {
+            token: authToken
+          }).then(response => {
+            this.isLoggedIn = response.data.isValid;
 
-          if (!response.data.isValid && isOnline) {
-            localStorage.removeItem('authToken');
-          } else {
-            this.isLoggedIn = true;
-          }
-        })
+            if (!response.data.isValid) {
+              localStorage.removeItem('authToken');
+            }
+          }).catch(() => {
+            this.$toast.open({
+              duration: 2000,
+              message: 'Looks like there was some error',
+              position: 'is-bottom',
+              type: 'is-danger'
+            });
+          })
+        } else {
+          this.isLoggedIn = true;
+        }
       }
     }
   }
@@ -113,5 +130,13 @@
   nav.navbar {
     padding-top: 1%;
     padding-bottom: 1%;
+  }
+
+  .my-footer {
+    text-align: center;
+    background: linear-gradient(to left, #B24592, #F15F79);
+    color: #ffffff;
+    padding-bottom: 1%;
+    padding-top: 1.5%;
   }
 </style>

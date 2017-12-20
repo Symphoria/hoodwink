@@ -1,6 +1,6 @@
 <template>
   <div id="backdrop">
-    <div class="container">
+    <div class="container" style="min-height: calc(100vh - 70px);">
       <transition appear name="fade">
         <div>
           <p class="header" style="font-size: 3.5em">Bookmarks</p>
@@ -27,6 +27,16 @@
         <a :class="{'pagination-previous': true, 'is-disabled': !hasPrevious}" @click="prevPage">Previous</a>
         <a :class="{'pagination-next': true, 'is-disabled': !hasNext}" @click="nextPage">Next Page</a>
       </nav>
+    </div>
+    <div class="my-footer is-size-7-mobile">
+      <p id="footer-made">
+        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank"
+                                 style="color: #80deea;">@Symphoria</a>) with
+        <i class="fa fa-laptop" aria-hidden="true"></i>,
+        <i class="fa fa-wifi" aria-hidden="true"></i> and
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </p>
+      <p>Learn more about me, or better contact me.</p>
     </div>
   </div>
 </template>
