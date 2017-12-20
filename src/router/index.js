@@ -69,7 +69,7 @@ let router = new Router({
       component: ForgetPassword
     },
     {
-      path: 'about',
+      path: '/about',
       name: 'about',
       component: About
     }

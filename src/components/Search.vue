@@ -48,7 +48,10 @@
         <i class="fa fa-wifi" aria-hidden="true"></i> and
         <i class="fa fa-heart" aria-hidden="true"></i>
       </p>
-      <p>Learn more about me, or better contact me.</p>
+      <p>Learn more
+        <router-link to="/about" style="color: #80deea;">about</router-link> me, or better
+        <router-link to="/about" style="color: #80deea;">contact</router-link> me.
+      </p>
     </div>
   </div>
 </template>
@@ -146,8 +149,6 @@
     /*margin-top: 0.9%;*/
     padding-left: 0.5%;
     padding-right: 0.5%;
-    /*height: 95%;*/
-    min-height: calc(100vh - 70px);
     overflow-x: hidden;
     overflow-y: visible;
   }
