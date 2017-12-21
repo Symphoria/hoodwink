@@ -9,15 +9,21 @@ import Bookmarks from '../components/Bookmarks.vue'
 import MyAccount from '../components/MyAccount'
 import ForgetPassword from '../components/ForgetPassword'
 import About from '../components/About'
+import Home from '../components/Home'
 
 Vue.use(Router);
 
 let router = new Router({
   routes: [
     {
+      path: '*',
+      name: 'home',
+      component: Home
+    },
+    {
       path: '/',
-      name: 'search',
-      component: Search
+      name: 'home',
+      component: Home
     },
     {
       path: '/search',
