@@ -3,7 +3,7 @@
     <h2 id="name">{{ mangaData.title }}</h2>
     <div class="columns details">
       <div class="column is-3 cover">
-        <img :src="coverUrl">
+        <img :src="coverUrl" alt="cover-art">
       </div>
       <div class="column is-9">
         <div class="columns">

@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Search from '../components/Search.vue'
-import Register from '../components/Register.vue'
-import Confirm from '../components/Confirm.vue'
-import Login from '../components/Login.vue'
-import TrackList from '../components/TrackList.vue'
-import Bookmarks from '../components/Bookmarks.vue'
-import MyAccount from '../components/MyAccount'
-import ForgetPassword from '../components/ForgetPassword'
-import About from '../components/About'
-import Home from '../components/Home'
+const Search = () => import('../components/Search.vue');
+const Register = () => import('../components/Register.vue');
+const Confirm = () => import('../components/Confirm.vue');
+const Login = () => import('../components/Login.vue');
+const TrackList = () => import('../components/TrackList.vue');
+const Bookmarks = () => import('../components/Bookmarks.vue');
+const MyAccount = () => import('../components/MyAccount.vue');
+const ForgetPassword = () => import('../components/ForgetPassword.vue');
+const About = () => import('../components/About');
+const Home = () => import('../components/Home');
 
 Vue.use(Router);
 

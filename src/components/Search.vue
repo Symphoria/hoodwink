@@ -13,7 +13,7 @@
                 <template scope="props">
                   <div class="media">
                     <div class="media-left">
-                      <img width="64" :src="props.option.cover">
+                      <img width="64" :src="props.option.cover" alt="cover-art">
                     </div>
                     <div class="media-content">
                       {{ props.option.name }}
@@ -42,7 +42,7 @@
     </div>
     <div class="my-footer is-size-7-mobile">
       <p id="footer-made">
-        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank"
+        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank" rel="noopener"
                                  style="color: #80deea;">@Symphoria</a>) with
         <i class="fa fa-laptop" aria-hidden="true"></i>,
         <i class="fa fa-wifi" aria-hidden="true"></i> and

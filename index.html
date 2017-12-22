@@ -7,6 +7,7 @@
     <title>hoodwink</title>
     <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
+    <meta name="Description" content="App name: Hoodwink, Developer: Symphoria">
     <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
     <!-- Add to home screen for Android and modern mobile browsers -->
     <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
@@ -25,6 +26,7 @@
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+    <noscript>Please enable Javascript for Hoodwink to work in your browser</noscript>
   </head>
   <body>
     <noscript>

@@ -5,11 +5,12 @@
         <transition appear name="slide-fade">
           <div class="box">
             <center>
-              <figure class="image"><img src="../assets/me.png"></figure>
+              <figure><img src="../assets/me.png" alt="Me"></figure>
             </center>
             <p class="name">Harshit Jain</p>
             <p style="text-align: center; color: darkslategray; font-size: 1.5em; margin-bottom: 1%">( Symphoria )</p>
-            <p><br>Yep, that's me. I usually go by the name <a href="https://github.com/Symphoria" target="_blank">Symphoria</a>
+            <p><br>Yep, that's me. I usually go by the name
+              <a href="https://github.com/Symphoria" target="_blank" rel="noopener">Symphoria</a>
               on the internet. I am an undergrad at IIIT Allahabad, pursuing my bachelors in Information Technology.<br>
               <br>I like to call myself a learner as a learner is not scared to break things and dares to push forward
               even after screwing up multiple times, a quality which I think is pivotal for any programmer. A learner is
@@ -20,10 +21,10 @@
               you might have guessed, I love anime and manga.<br><br>If you found any bugs or have any kind of feedback
               regarding Hoodwink, I would love to hear about it. Or if you just want to talk about music, anime, tech,
               code or life in general, you can find me on
-              <a href="https://www.facebook.com/harshit.jain.37604303" target="_blank">Facebook</a>,
-              <a href="https://twitter.com/harshit_jain_98" target="_blank">Twitter</a>,
-              <a href="https://github.com/Symphoria" target="_blank">Github</a> and
-              <a href="https://medium.com/@Symphoria" target="_blank">Medium</a>. Or you can email me at
+              <a href="https://www.facebook.com/harshit.jain.37604303" target="_blank" rel="noopener">Facebook</a>,
+              <a href="https://twitter.com/harshit_jain_98" target="_blank" rel="noopener">Twitter</a>,
+              <a href="https://github.com/Symphoria" target="_blank" rel="noopener">Github</a> and
+              <a href="https://medium.com/@Symphoria" target="_blank" rel="noopener">Medium</a>. Or you can email me at
               <strong>hj.harshit007@gmail.com</strong>
             </p>
           </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <img :src="coverUrl">
+    <img :src="coverUrl" alt="Cover Art">
     <h2 id="name">{{ title }}</h2>
     <p class="updated"><strong>Bookmark at : </strong>Chapter {{ chapter }}</p>
     <div class="columns is-mobile">

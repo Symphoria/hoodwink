@@ -16,19 +16,19 @@
       <div class="columns" style="margin-top: 3%;">
         <transition appear name="slide-left">
           <div class="column">
-            <img src="../assets/Search.png">
+            <img src="../assets/Search.png" alt="search">
             <p class="steps">Search for the manga you like</p>
           </div>
         </transition>
         <transition appear name="slide-fade">
           <div class="column">
-            <img src="../assets/Plus.png">
+            <img src="../assets/Plus.png" alt="add">
             <p class="steps">Add it your tracklist</p>
           </div>
         </transition>
         <transition appear name="slide-right">
           <div class="column">
-            <img src="../assets/SecuredLetter.png">
+            <img src="../assets/SecuredLetter.png" alt="get-email">
             <p class="steps">Get notified via email</p>
           </div>
         </transition>
@@ -38,7 +38,7 @@
         <div class="container" style="margin-top: 2%;">
           <div class="level">
             <div class="level-item has-text-centered">
-              <img src="../assets/Bookmark.png">
+              <img src="../assets/Bookmark.png" alt="bookmark-image">
             </div>
             <p id="bookmark">
               Hoodwink has bookmarks which means no more time wasting finding the last chapter read while in the
@@ -54,7 +54,7 @@
     <div class="my-footer is-size-7-mobile">
       <p id="footer-made">
         Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank"
-                                 style="color: #80deea;">@Symphoria</a>) with
+                                 style="color: #80deea;" rel="noopener">@Symphoria</a>) with
         <i class="fa fa-laptop" aria-hidden="true"></i>,
         <i class="fa fa-wifi" aria-hidden="true"></i> and
         <i class="fa fa-heart" aria-hidden="true"></i>

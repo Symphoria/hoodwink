@@ -30,13 +30,16 @@
     </div>
     <div class="my-footer is-size-7-mobile">
       <p id="footer-made">
-        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank"
+        Made by Harshit Jain (<a href="https://github.com/Symphoria" target="_blank" rel="noopener"
                                  style="color: #80deea;">@Symphoria</a>) with
         <i class="fa fa-laptop" aria-hidden="true"></i>,
         <i class="fa fa-wifi" aria-hidden="true"></i> and
         <i class="fa fa-heart" aria-hidden="true"></i>
       </p>
-      <p>Learn more about me, or better contact me.</p>
+      <p>Learn more
+        <router-link to="/about" style="color: #80deea;">about</router-link> me, or better
+        <router-link to="/about" style="color: #80deea;">contact</router-link> me.
+      </p>
     </div>
   </div>
 </template>

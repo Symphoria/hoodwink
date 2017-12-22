@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <img :src="coverUrl">
+    <img :src="coverUrl" alt="cover-art">
     <h2 id="name">{{ title }}</h2>
     <p class="updated" v-text="getUserFriendlyDate"></p>
     <div class="columns is-mobile">
