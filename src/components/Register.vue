@@ -201,6 +201,10 @@
     box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
   }
 
+  hr {
+    background-color: gray;
+  }
+
   .slide-fade-enter-active {
     transition: all .5s ease;
   }

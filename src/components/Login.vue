@@ -167,6 +167,10 @@
     padding-top: 5%;
   }
 
+  hr {
+    background-color: gray;
+  }
+
   .slide-fade-enter-active {
     transition: all .5s ease;
   }
