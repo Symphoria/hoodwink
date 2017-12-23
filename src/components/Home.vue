@@ -1,11 +1,18 @@
 <template>
   <div>
     <transition appear name="fade">
-      <div id="brand-name">
-        <p id="hoodwink">HOODWINK</p>
-        <p class="subheading">The Manga Updates Tracker</p>
-        <p class="subheading">We track updates of your favorite manga, so you don't have to</p>
-        <router-link to="/search" class="button is-outlined get-started">Get Started</router-link>
+      <div id="brand-name" class="columns">
+        <div class="column is-2"></div>
+        <div class="column is-3">
+          <img src="../assets/hoodwink-logo-white.svg" alt="logo" style="max-width: 50%; margin-top: 8%;">
+        </div>
+        <div class="column">
+          <p id="hoodwink">HOODWINK</p>
+          <p class="subheading">The Manga Updates Tracker</p>
+          <p class="subheading">We track updates of your favorite manga, so you don't have to</p>
+          <router-link to="/search" class="button is-outlined get-started">Get Started</router-link>
+        </div>
+        <div class="column is-1"></div>
       </div>
     </transition>
     <div class="container" style="padding-top: 3%;">
@@ -80,7 +87,8 @@
     background: linear-gradient(to left, #B24592, #F15F79);
     text-align: center;
     padding-top: 2%;
-    padding-bottom: 3%;
+    padding-bottom: 2%;
+    margin-top: 0;
   }
 
   #hoodwink {

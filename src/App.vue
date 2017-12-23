@@ -2,7 +2,10 @@
   <div id="app">
     <nav class="navbar is-transparent container" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item" id="brand">HOODWINK</router-link>
+        <router-link to="/" class="navbar-item" id="brand">
+          <img src="./assets/hoodwink-logo.svg" alt="logo" style="width: 3rem;">
+          HOODWINK
+        </router-link>
         <div :class="{'navbar-burger': true, 'burger': true, 'is-active': isActive}"
              data-target="nav-menu-transparent"
              @click="toggleIsActive">
