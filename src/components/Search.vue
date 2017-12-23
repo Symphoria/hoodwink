@@ -13,7 +13,7 @@
                 <template scope="props">
                   <div class="media">
                     <div class="media-left">
-                      <img width="64" :src="props.option.cover" alt="cover-art">
+                      <img width="64" :src="props.option.cover.slice(0,4) + 's' + props.option.cover.slice(4)" alt="cover-art">
                     </div>
                     <div class="media-content">
                       {{ props.option.name }}

@@ -29,21 +29,19 @@
         <p style="margin-top: 2%"><strong>Latest Chapter: </strong>{{ latestChapter }}</p>
         <div class="columns" style="margin-top: 2%">
           <div class="column">
-            <div class="field is-grouped is-grouped-left">
-              <p class="control">
-                <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"></track-list-button>
-              </p>
-              <p class="control">
-                <bookmark-button :manga-id="mangaId" :chapter="latestChapter">Add Bookmark</bookmark-button>
-              </p>
-            </div>
+            <p class="control">
+              <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"  style="width: 100%;"></track-list-button>
+            </p>
           </div>
           <div class="column">
-            <div class="field is-grouped is-grouped-right">
-              <p class="control" style="width: 100%;">
-                <a class="button read" :href="mangaUrl" target="_blank">Read</a>
-              </p>
-            </div>
+            <p class="control">
+              <bookmark-button :manga-id="mangaId" :chapter="latestChapter"  style="width: 100%;">Add Bookmark</bookmark-button>
+            </p>
+          </div>
+          <div class="column">
+            <p class="control">
+              <a class="button read" :href="mangaUrl" target="_blank"  style="width: 100%;">Read</a>
+            </p>
           </div>
         </div>
       </div>
