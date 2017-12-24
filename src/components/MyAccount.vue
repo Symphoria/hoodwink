@@ -204,11 +204,11 @@
         loadingComponent.close();
         this.$toast.open({
           duration: 2000,
-          message: 'Looks like there was some error. Please login again',
+          message: 'Looks like there was some error. Please logout and login again',
           position: 'is-bottom',
           type: 'is-danger'
         });
-        this.$emit('logged-out')
+        this.$router.replace({ name: 'search' });
       })
     }
   }
