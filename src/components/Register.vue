@@ -73,6 +73,7 @@
   import GithubButton from './social_buttons/GithubOauth.vue'
   import ajax from '../utilities/ajax'
   import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
+  import firebase from "firebase";
 
   export default {
     components: { BNotification, FacebookButton, GoogleButton, TwitterButton, GithubButton },
