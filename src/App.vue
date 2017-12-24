@@ -47,7 +47,8 @@
 </template>
 
 <script>
-  import ajax from './utilities/ajax'
+  import ajax from './utilities/ajax';
+  import firebase from "firebase";
 
   export default {
     name: 'app',
@@ -62,9 +63,18 @@
         this.isActive = !this.isActive;
       },
       logOut() {
-        localStorage.removeItem('authToken');
-        this.isLoggedIn = false;
-        this.$router.replace({name: 'login'})
+        firebase.auth().signOut().then(() => {
+          localStorage.clear();
+          this.isLoggedIn = false;
+          this.$router.replace({name: 'home'});
+          window.location.reload();
+        }).catch(error => {
+          console.log(error);
+          localStorage.clear();
+          this.isLoggedIn = false;
+          this.$router.replace({name: 'home'});
+          window.location.reload();
+        })
       }
     },
     mounted() {

@@ -11,21 +11,19 @@
   export default {
     methods: {
       signIn() {
-        let self = this;
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('profile');
-        provider.addScope('email');
-        firebase.auth().signInWithPopup(provider).then(result => {
-          let user = result.user;
-          self.$emit('has-logged-in', user.email);
-        }).catch(error => {
-          self.$snackbar.open({
-            duration: 10000,
-            message: error.message,
-            type: 'is-danger',
-            position: 'is-bottom-right'
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+          .then(function() {
+            let provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope('profile');
+            provider.addScope('email');
+            return firebase.auth().signInWithRedirect(provider);
+          })
+          .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
           });
-        })
+        
       }
     }
   }

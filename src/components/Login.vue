@@ -36,7 +36,7 @@
           <p id="sign-up" style="text-align: center">Log In Using :</p>
           <div class="columns is-desktop">
             <div class="column" style="text-align: center;">
-              <google-button @has-logged-in="oauthSignUp"></google-button>
+              <google-button></google-button>
             </div>
             <div class="column" style="text-align: center;">
               <facebook-button @has-logged-in="oauthSignUp"></facebook-button>
@@ -62,6 +62,7 @@
   import ajax from '../utilities/ajax'
   import BNotification from "../../node_modules/buefy/src/components/notification/Notification.vue";
   import ForgetPasswordButton from "./utility_buttons/ForgetPasswordButton"
+  import firebase from "firebase";
 
   export default {
     components: {FacebookButton, GoogleButton, TwitterButton, GithubButton, BNotification, ForgetPasswordButton},
@@ -80,6 +81,8 @@
       validateAll() {
         this.isPasswordEmpty = this.password === '';
         this.isUsernameEmpty = this.usernameOrEmail === '';
+
+        return !this.isUsernameEmpty && !this.isPasswordEmpty;
       },
       submitForm() {
         if (this.validateAll()) {
@@ -106,24 +109,39 @@
       },
       oauthSignUp(email) {
         const loadingComponent = this.$loading.open();
+
         ajax.post('login', {
           usernameOrEmail: email,
           viaOauth: true
         }).then(response => {
           localStorage.setItem('authToken', response.data.authToken);
           this.$emit('logged-in');
+          this.$emit('oauth-login');
           loadingComponent.close();
           this.$router.replace({ name: 'search' })
         }).catch(error => {
           loadingComponent.close();
           this.$snackbar.open({
-            duration: 15000,
+            duration: 10000,
             message: error.response.data.message,
             type: 'is-danger',
             position: 'is-bottom-right'
           });
         })
       }
+    },
+    mounted: function() {      
+      firebase.auth().getRedirectResult().then(result => {
+        let user = result.user;
+        this.oauthSignUp(user.email);
+      }).catch(error => {
+        self.$snackbar.open({
+          duration: 10000,
+          message: error.message,
+          type: 'is-danger',
+          position: 'is-bottom-right'
+        });
+      })
     }
   }
 </script>

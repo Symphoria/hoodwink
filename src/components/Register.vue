@@ -98,6 +98,8 @@
         this.isUsernameEmpty = this.username === '';
         this.isPasswordEmpty = this.password === '';
         this.isEmailEmpty = this.email === '' || !validateEmail();
+
+        return !this.isUsernameEmpty && !this.isPasswordEmpty && !this.isEmailEmpty;
       },
       resetAll() {
         this.isUsernameEmpty = this.isPasswordEmpty = this.isEmailEmpty = false;
@@ -145,13 +147,26 @@
         }).catch(error => {
           loadingComponent.close();
           this.$snackbar.open({
-            duration: 15000,
+            duration: 10000,
             message: error.response.data.message,
             type: 'is-danger',
             position: 'is-bottom-right'
           });
         })
       }
+    },
+    mounted: function() {      
+      firebase.auth().getRedirectResult().then(result => {
+        let user = result.user;
+        this.oauthSignUp(user.email);
+      }).catch(error => {
+        self.$snackbar.open({
+          duration: 10000,
+          message: error.message,
+          type: 'is-danger',
+          position: 'is-bottom-right'
+        });
+      })
     }
   }
 </script>
