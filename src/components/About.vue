@@ -21,12 +21,29 @@
               you might have guessed, I love anime and manga.<br><br>If you found any bugs or have any kind of feedback
               regarding Hoodwink, I would love to hear about it. Or if you just want to talk about music, anime, tech,
               code or life in general, you can find me on
-              <a href="https://www.facebook.com/harshit.jain.37604303" target="_blank" rel="noopener">Facebook</a>,
-              <a href="https://twitter.com/harshit_jain_98" target="_blank" rel="noopener">Twitter</a>,
-              <a href="https://github.com/Symphoria" target="_blank" rel="noopener">Github</a> and
-              <a href="https://medium.com/@Symphoria" target="_blank" rel="noopener">Medium</a>. Or you can email me at
+              <strong><a href="https://www.facebook.com/harshit.jain.37604303" target="_blank" rel="noopener">Facebook</a></strong>,
+              <strong><a href="https://twitter.com/harshit_jain_98" target="_blank" rel="noopener">Twitter</a></strong>,
+              <strong><a href="https://github.com/Symphoria" target="_blank" rel="noopener">Github</a></strong> and
+              <strong><a href="https://medium.com/@Symphoria" target="_blank" rel="noopener">Medium</a></strong>. 
+              Or you can email me at
               <strong>hj.harshit007@gmail.com</strong>
             </p>
+            <hr>
+            <div class="columns">
+              <div class="column is-4" style="text-align: center;">
+                <img src="../assets/himank.png">
+              </div>
+              <div class="column">
+                <p>By the way, Hoodwink's logo was made by<br><span id="himank">Himank Goel</span><br><br>
+                  He is a passionate designer, a developer, a rebel and an outlier. He believes that it is not the user 
+                  who interacts with the product 
+                  but the design which interacts with the user.<br>To view more of Himank's works, visit
+                  <a href="https://himank-goel.github.io/Portfolio-Website" target="_blank" rel="noopener">
+                    his site
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
         </transition>
       </div>
@@ -45,12 +62,12 @@
     background: linear-gradient(to left, #B24592, #F15F79);
     margin-left: 0;
     margin-right: 0;
-    /*margin-top: 0.9%;*/
+    margin-top: 0.9%;
     padding-left: 0.5%;
     padding-right: 0.5%;
-    height: 95%;
-    overflow-x: hidden;
-    overflow-y: visible;
+    /* height: 95%; */
+    /* overflow-x: hidden;
+    overflow-y: visible; */
   }
 
   .box {
@@ -73,6 +90,13 @@
     font-weight: 300;
     margin-top: 1%;
     font-size: 2.6em;
+  }
+
+  #himank {
+    font-size: 2em;
+    font-family: "Lato", "Helvetica Neue", sans-serif;
+    color: #F15F79;
+    font-weight: 300;
   }
 
   .slide-fade-enter-active {

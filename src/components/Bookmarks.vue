@@ -23,6 +23,9 @@
           </div>
         </div>
       </transition>
+      <div v-if="!bookmarksReady">
+          <p class="header fetching">Fetching your bookmarks...</p>
+        </div>
       <nav class="pagination is-centered">
         <a :class="{'pagination-previous': true, 'is-disabled': !hasPrevious}" @click="prevPage">Previous</a>
         <a :class="{'pagination-next': true, 'is-disabled': !hasNext}" @click="nextPage">Next Page</a>
@@ -112,12 +115,11 @@
     margin-left: 0;
     margin-right: 0;
     /*margin-top: 0.9%;*/
-    padding-bottom: 2%;
     padding-left: 0.5%;
     padding-right: 0.5%;
-    height: 100%;
+    /* height: 100%;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: visible; */
   }
 
   .columns {
@@ -129,6 +131,12 @@
     color: #ffffff;
     text-align: center;
     font-weight: 100;
+  }
+
+  .fetching {
+    font-size: 1.6em;
+    margin-top: 15%;
+    margin-bottom: 15%;
   }
 
   .pagination-next {

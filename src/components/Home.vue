@@ -4,7 +4,7 @@
       <div id="brand-name" class="columns">
         <div class="column is-2"></div>
         <div class="column is-3">
-          <img src="../assets/hoodwink-logo-white.svg" alt="logo" style="max-width: 50%; margin-top: 8%;">
+          <img src="../assets/hoodwink-logo-white.svg" alt="logo" style="max-width: 50%; margin-top: 9%;">
         </div>
         <div class="column">
           <p id="hoodwink">HOODWINK</p>
@@ -12,7 +12,7 @@
           <p class="subheading">We track updates of your favorite manga, so you don't have to</p>
           <router-link to="/search" class="button is-outlined get-started">Get Started</router-link>
         </div>
-        <div class="column is-1"></div>
+        <div class="column is-2"></div>
       </div>
     </transition>
     <div class="container" style="padding-top: 3%;">

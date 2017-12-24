@@ -70,7 +70,7 @@
               </div>
             </div>
           </transition>
-          <div class="columns" style="margin-top: 2%">
+          <div class="columns is-mobile" style="margin-top: 2%">
             <div class="column">
               <div class="field is-grouped is-grouped-left">
                 <p class="control">
@@ -224,8 +224,8 @@
     padding-left: 0.5%;
     padding-right: 0.5%;
     height: 95%;
-    overflow-x: hidden;
-    overflow-y: visible;
+    /*overflow-x: hidden;
+    overflow-y: visible; */
     /*flex: 1 0 auto;*/
   }
 
