@@ -56,7 +56,12 @@
             }
           })
         } else {
-          this.$router.replace({name: 'login'})
+          this.$snackbar.open({
+            duration: 9000,
+            message: 'Looks like you are not logged in. Please login and try again',
+            type: 'is-warning',
+            position: 'is-bottom-right'
+          })
         }
       }
     },

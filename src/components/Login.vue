@@ -130,11 +130,15 @@
         })
       }
     },
-    mounted: function() {      
+    mounted: function() {
+      const loadComponent = this.$loading.open();
+
       firebase.auth().getRedirectResult().then(result => {
+        loadComponent.close();
         let user = result.user;
         this.oauthSignUp(user.email);
       }).catch(error => {
+        loadComponent.close();
         self.$snackbar.open({
           duration: 10000,
           message: error.message,
