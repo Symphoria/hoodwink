@@ -14,18 +14,19 @@
           <span></span>
         </div>
       </div>
-      <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}">
+      <transition name="slide-fade">
+      <div id="nav-menu-transparent" :class="{'navbar-menu': true, 'is-active': isActive}" v-show="showNavBurger">
         <div class="navbar-start">
-          <router-link to="/about" class="navbar-item">About</router-link>
-          <router-link to="/tracklist" class="navbar-item">Tracklist</router-link>
-          <router-link to="/bookmarks" class="navbar-item">Bookmarks</router-link>
+          <a class="navbar-item" @click="goAbout">About</a>
+          <a class="navbar-item" @click="goTrackList">Tracklist</a>
+          <a class="navbar-item" @click="goBookmarks">Bookmarks</a>
         </div>
         <div class="navbar-end">
-          <router-link to="/search" class="navbar-item"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
-          </router-link>
+          <a class="navbar-item" @click="goSearch"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search
+          </a>
           <div class="field has-addons navbar-item" v-if="isLoggedIn">
             <p class="control">
-              <router-link to="/my-account" class="button is-primary">My Account</router-link>
+              <a class="button is-primary" @click="goMyAccount">My Account</a>
             </p>
             <p class="control">
               <a class="button is-outlined" @click="logOut">Log Out</a>
@@ -33,14 +34,15 @@
           </div>
           <div class="field has-addons navbar-item" v-else>
             <p class="control">
-              <router-link to="/login" class="button is-outlined">Login</router-link>
+              <a class="button is-outlined" @click="goLogin">Login</a>
             </p>
             <p class="control">
-              <router-link to="/register" class="button is-primary">Sign Up</router-link>
+              <a class="button is-primary" @click="goRegister">Sign Up</a>
             </p>
           </div>
         </div>
       </div>
+      </transition>
     </nav>
     <router-view @logged-in="isLoggedIn = true" @logged-out="logOut"></router-view>
   </div>
@@ -75,6 +77,39 @@
           this.$router.replace({name: 'home'});
           window.location.reload();
         })
+      },
+      goAbout() {
+        this.toggleIsActive();
+        this.$router.push({name: 'about'})
+      },
+      goTrackList() {
+        this.toggleIsActive();
+        this.$router.push({name: 'tracklist'})
+      },
+      goBookmarks() {
+        this.toggleIsActive();
+        this.$router.push({name: 'bookmarks'})
+      },
+      goMyAccount() {
+        this.toggleIsActive();
+        this.$router.push({name: 'my-account'})
+      },
+      goLogin() {
+        this.toggleIsActive();
+        this.$router.push({name: 'login'})
+      },
+      goRegister() {
+        this.toggleIsActive();
+        this.$router.push({name: 'register'})
+      },
+      goSearch() {
+        this.toggleIsActive();
+        this.$router.push({name: 'search'})
+      }
+    },
+    computed: {
+      showNavBurger() {
+        return window.innerWidth >= 1024 || this.isActive;
       }
     },
     mounted() {
@@ -143,5 +178,20 @@
     color: #ffffff;
     padding-bottom: 1%;
     padding-top: 1.5%;
+  }
+
+  .slide-fade-enter-active {
+    transition: all .5s ease;
+  }
+
+  /* .slide-fade-leave-active {
+    transition: all .5s ease;
+  } */
+
+  .slide-fade-enter
+    /* .slide-fade-leave-active below version 2.1.8 */
+  {
+    transform: translateY(-15px);
+    opacity: 0;
   }
 </style>

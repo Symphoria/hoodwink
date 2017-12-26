@@ -98,7 +98,7 @@
       validateAll() {
         this.isUsernameEmpty = this.username === '';
         this.isPasswordEmpty = this.password === '';
-        this.isEmailEmpty = this.email === '' || !validateEmail();
+        this.isEmailEmpty = this.email === '' || !this.validateEmail();
 
         return !this.isUsernameEmpty && !this.isPasswordEmpty && !this.isEmailEmpty;
       },
