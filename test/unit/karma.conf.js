@@ -18,6 +18,19 @@ module.exports = function (config) {
     preprocessors: {
       './index.js': ['webpack', 'sourcemap']
     },
+    plugins: [
+      // Test Libraries
+      'karma-mocha',
+      'karma-sinon-chai',
+
+      // Preprocessors
+      'karma-webpack',
+      'karma-sourcemap-loader',
+
+      // Reporters
+      'karma-spec-reporter',
+      'karma-coverage'
+    ],
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true

@@ -80,31 +80,31 @@
       },
       goAbout() {
         this.toggleIsActive();
-        this.$router.push({name: 'about'})
+        this.$router.replace({name: 'about'})
       },
       goTrackList() {
         this.toggleIsActive();
-        this.$router.push({name: 'tracklist'})
+        this.$router.replace({name: 'tracklist'})
       },
       goBookmarks() {
         this.toggleIsActive();
-        this.$router.push({name: 'bookmarks'})
+        this.$router.replace({name: 'bookmarks'})
       },
       goMyAccount() {
         this.toggleIsActive();
-        this.$router.push({name: 'my-account'})
+        this.$router.replace({name: 'my-account'})
       },
       goLogin() {
         this.toggleIsActive();
-        this.$router.push({name: 'login'})
+        this.$router.replace({name: 'login'})
       },
       goRegister() {
         this.toggleIsActive();
-        this.$router.push({name: 'register'})
+        this.$router.replace({name: 'register'})
       },
       goSearch() {
         this.toggleIsActive();
-        this.$router.push({name: 'search'})
+        this.$router.replace({name: 'search'})
       }
     },
     computed: {

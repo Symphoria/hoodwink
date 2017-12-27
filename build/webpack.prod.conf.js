@@ -129,7 +129,15 @@ var webpackConfig = merge(baseWebpackConfig, {
           handler: 'cacheFirst'
         },
         {
-          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/'),
+          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/tracklist'),
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/bookmarks'),
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/users'),
           handler: 'networkFirst'
         }
       ]

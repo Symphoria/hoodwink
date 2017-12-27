@@ -111,7 +111,7 @@
         const loadingComponent = this.$loading.open();
 
         ajax.post('login', {
-          usernameOrEmail: email,
+          usernameOrEmail: email.trim(),
           viaOauth: true
         }).then(response => {
           localStorage.setItem('authToken', response.data.authToken);
