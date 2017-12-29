@@ -88,16 +88,11 @@
           this.hasNext = response.data.hasNext;
           this.hasPrevious = response.data.hasPrevious;
           this.totalPages = response.data.totalPages;
-
-          if (response.data.message !== null) {
-            this.noTrackList = true;
-          } else {
-            this.segmentList(response.data.mangaData);
-          }
-
+          this.segmentList(response.data.mangaData);
           this.trackListReady = true;
         }).catch(error => {
-          console.log(error.response);
+          this.trackListReady = true;
+          this.noTrackList = true;
         })
       },
       segmentList(mangaData) {
