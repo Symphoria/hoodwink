@@ -31,6 +31,9 @@
               </div>
             </div>
           </div>
+          <div class="field">
+            <b-notification type="is-danger" :active.sync="hasError">{{ errorText }}</b-notification>
+          </div>
           <center>
             <a class="button" id="change-password" @click="showChangePassword = !showChangePassword">
               Change Password&nbsp;
@@ -99,9 +102,12 @@
   import BInput from "buefy/src/components/input/Input";
   import ajax from '../utilities/ajax'
   import DeleteAccountButton from "./utility_buttons/DeleteAccountButton"
+  import BNotification from "buefy/src/components/notification/Notification";
 
   export default {
-    components: {BInput, DeleteAccountButton},
+    components: {
+      BNotification,
+      BInput, DeleteAccountButton},
     name: "my-account",
     data() {
       return {
@@ -113,7 +119,9 @@
         isNewPasswordEmpty: false,
         showChangePassword: false,
         onGoingRequest: false,
-        errorMessage: 'Please enter old password'
+        errorMessage: 'Please enter old password',
+        hasError: false,
+        errorText: ''
       }
     },
     computed: {
@@ -147,8 +155,8 @@
         if (this.validateAll()) {
           this.onGoingRequest = true;
           let requestData = {
-            username: this.username,
-            email: this.email,
+            username: this.username.trim(),
+            email: this.email.trim(),
             changePassword: false
           };
 
@@ -172,10 +180,13 @@
             })
           }).catch(error => {
             this.onGoingRequest = false;
-            console.log(error.response);
+
             if (error.response.status === 403) {
               this.errorMessage = error.response.data.message;
               this.isOldPasswordEmpty = true;
+            } else if (error.response.status === 400) {
+              this.errorText = error.response.data.message;
+              this.hasError = true;
             } else {
               this.$toast.open({
                 duration: 2000,

@@ -26,11 +26,10 @@
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
-    <noscript>Please enable Javascript for Hoodwink to work in your browser</noscript>
   </head>
   <body>
     <noscript>
-      This is your fallback content in case JavaScript fails to load.
+      Please enable Javascript for Hoodwink to work in your browser
     </noscript>
     <div id="app"></div>
     <!-- Todo: only include in production -->

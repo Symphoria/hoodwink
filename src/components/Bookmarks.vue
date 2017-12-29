@@ -24,8 +24,12 @@
         </div>
       </transition>
       <div v-if="!bookmarksReady">
-          <p class="header fetching">Fetching your bookmarks...</p>
-        </div>
+        <p class="header fetching">Fetching your bookmarks...</p>
+      </div>
+      <div v-show="noBookmarks">
+        <p class="header fetching" style="margin-top: 10%;">Looks like you have not bookmarked any manga<br>Search for a
+          manga and click Add Bookmark for it to show here</p>
+      </div>
       <nav class="pagination is-centered">
         <a :class="{'pagination-previous': true, 'is-disabled': !hasPrevious}" @click="prevPage">Previous</a>
         <a :class="{'pagination-next': true, 'is-disabled': !hasNext}" @click="nextPage">Next Page</a>
@@ -40,8 +44,10 @@
         <i class="fa fa-heart" aria-hidden="true"></i>
       </p>
       <p>Learn more
-        <router-link to="/about" style="color: #80deea;">about</router-link> me, or better
-        <router-link to="/about" style="color: #80deea;">contact</router-link> me.
+        <router-link to="/about" style="color: #80deea;">about</router-link>
+        me, or better
+        <router-link to="/about" style="color: #80deea;">contact</router-link>
+        me.
       </p>
     </div>
   </div>
@@ -60,7 +66,8 @@
         hasPrevious: false,
         totalPages: 0,
         mangaList: [[], [], []],
-        bookmarksReady: false
+        bookmarksReady: false,
+        noBookmarks: false
       }
     },
     mounted: function () {
@@ -83,8 +90,9 @@
           this.totalPages = response.data.totalPages;
           this.segmentList(response.data.mangaData);
           this.bookmarksReady = true;
-        }).catch(error => {
-          console.log(error.response);
+        }).catch(() => {
+          this.bookmarksReady = true;
+          this.noBookmarks = true;
         })
       },
       segmentList(mangaData) {
