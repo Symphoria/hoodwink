@@ -30,7 +30,7 @@
         <div class="columns" style="margin-top: 2%">
           <div class="column">
             <p class="control">
-              <track-list-button :manga-id="mangaId" :in-track-list="inTracklist"  style="width: 100%;"></track-list-button>
+              <track-list-button :manga-id="mangaId" :in-track-list="inTracklist" :status="status" style="width: 100%;"></track-list-button>
             </p>
           </div>
           <div class="column">
