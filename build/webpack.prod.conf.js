@@ -108,6 +108,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
+    // Ignoring all moment.js locales to reduce bundle size
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // service worker caching
     new SWPrecacheWebpackPlugin({
       cacheId: 'my-vue-app',
@@ -129,15 +131,15 @@ var webpackConfig = merge(baseWebpackConfig, {
           handler: 'cacheFirst'
         },
         {
-          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/tracklist'),
+          urlPattern: new RegExp('https://api-hoodwink.herokuapp.com/tracklist'),
           handler: 'networkFirst'
         },
         {
-          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/bookmarks'),
+          urlPattern: new RegExp('https://api-hoodwink.herokuapp.com/bookmarks'),
           handler: 'networkFirst'
         },
         {
-          urlPattern: new RegExp('https://hoodwink-api.herokuapp.com/users'),
+          urlPattern: new RegExp('https://api-hoodwink.herokuapp.com/users'),
           handler: 'networkFirst'
         }
       ]
