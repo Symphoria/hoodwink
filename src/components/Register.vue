@@ -162,11 +162,14 @@
       firebase.auth().getRedirectResult().then(result => {
         loadComponent.close();
         let user = result.user;
-        this.oauthSignUp(user.email);
+        
+        if (user !== null) {
+          this.oauthSignUp(user.email);
+        }
       }).catch(error => {
         loadComponent.close();
         
-        self.$snackbar.open({
+        this.$snackbar.open({
           duration: 10000,
           message: error.message,
           type: 'is-danger',
