@@ -26,6 +26,7 @@
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
+    <meta name="google-site-verification" content="y8OBrjUA9C7MUg37YiUfln1V7o2YUlvmrTo3A9_fpfk" />
   </head>
   <body>
     <noscript>
